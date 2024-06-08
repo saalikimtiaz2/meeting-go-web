@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CiCalendarDate } from 'react-icons/ci';
 import { GoSidebarCollapse } from 'react-icons/go';
 import { IoIosNotificationsOutline } from 'react-icons/io';
@@ -8,10 +8,21 @@ import { SiGoogledisplayandvideo360 } from 'react-icons/si';
 import { NavLink } from 'react-router-dom';
 
 function SideBar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const getSidebarOpenedFromLocalStorage = () => {
+    const value = localStorage.getItem('sidebarOpened');
+    return value === 'true'; // Returns true if value is 'true', otherwise false
+  };
+
+  const [isCollapsed, setIsCollapsed] = useState(getSidebarOpenedFromLocalStorage());
+
+  // Use useEffect to ensure localStorage is synced if isCollapsed changes elsewhere
+  useEffect(() => {
+    localStorage.setItem('sidebarOpened', isCollapsed.toString());
+  }, [isCollapsed]);
 
   const toggleCollapsed = () => {
     setIsCollapsed((prevState) => !prevState);
+    localStorage.setItem('sidebarOpened', isCollapsed.toString());
   };
 
   const menuItem = [
