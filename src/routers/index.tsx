@@ -20,7 +20,10 @@ function Routers() {
           <Route path="/meeting" element={<Meeting />} />
           <Route path="/notifications" element={<Meeting />} />
           <Route path="/schedule" element={<Meeting />} />
+          <Route path="/contacts" element={<Meeting />} />
           <Route path="/settings" element={<Meeting />} />
+          <Route path="/support" element={<Meeting />} />
+          <Route path="/help" element={<Meeting />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

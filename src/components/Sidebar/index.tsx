@@ -3,7 +3,8 @@ import { CiCalendarDate } from 'react-icons/ci';
 import { GoSidebarCollapse } from 'react-icons/go';
 import { IoIosNotificationsOutline } from 'react-icons/io';
 import { IoHomeOutline, IoSettingsOutline } from 'react-icons/io5';
-import { PiVideoConferenceThin } from 'react-icons/pi';
+import { MdOutlineHelpOutline, MdSupportAgent } from 'react-icons/md';
+import { PiUsersThree, PiVideoConferenceThin } from 'react-icons/pi';
 import { SiGoogledisplayandvideo360 } from 'react-icons/si';
 import { NavLink } from 'react-router-dom';
 
@@ -26,7 +27,11 @@ function SideBar() {
   };
 
   const menuItem = [
-    { icon: <IoHomeOutline size={isCollapsed ? 30 : 26} />, title: 'Home', link: '/' },
+    {
+      icon: <IoHomeOutline size={isCollapsed ? 30 : 26} />,
+      title: 'Dashboard',
+      link: '/',
+    },
     {
       icon: <PiVideoConferenceThin size={isCollapsed ? 30 : 26} />,
       title: 'Meeting',
@@ -43,9 +48,27 @@ function SideBar() {
       link: '/schedule',
     },
     {
-      icon: <IoSettingsOutline size={isCollapsed ? 30 : 26} />,
+      icon: <PiUsersThree size={isCollapsed ? 30 : 26} />,
+      title: 'Contacts',
+      link: '/contacts',
+    },
+  ];
+
+  const generalItems = [
+    {
+      icon: <IoSettingsOutline size={isCollapsed ? 26 : 22} />,
       title: 'Settings',
       link: '/settings',
+    },
+    {
+      icon: <MdSupportAgent size={isCollapsed ? 26 : 22} />,
+      title: 'Support',
+      link: '/support',
+    },
+    {
+      icon: <MdOutlineHelpOutline size={isCollapsed ? 26 : 22} />,
+      title: 'Help',
+      link: '/help',
     },
   ];
 
@@ -67,13 +90,37 @@ function SideBar() {
       </button>
 
       <ul className="pt-20">
+        <li className="text-gray-400 text-md font-Oswald ml-8 mb-2">Menu</li>
         {menuItem.map((item) => (
           <li key={item.title}>
             <NavLink
               to={item.link}
               className={({ isActive }) =>
-                (isActive ? 'text-accent selected bg-accent bg-opacity-10' : '') +
-                ` flex items-center gap-x-4 text-lg pl-8 mb-8 py-2 hover:text-accent hover:cursor-pointer trasition-all ease-in-out duration-300 ${
+                (isActive
+                  ? 'text-accent selected bg-gradient-to-l from-[#debcff] from-10% to-transparent to-20 '
+                  : '') +
+                ` flex items-center gap-x-4 text-lg pl-8 mb-2 py-2 hover:text-accent hover:cursor-pointer trasition-all ease-in-out duration-300 ${
+                  isCollapsed ? 'pr-8 ' : 'pr-16'
+                }`
+              }
+            >
+              {item.icon}
+              <span className={`${isCollapsed && 'absolute -left-[250px] font-medium'}`}>
+                {item.title}
+              </span>
+            </NavLink>
+          </li>
+        ))}
+        <li className="text-gray-400 text-md font-Oswald ml-8 mb-2 mt-20">General</li>
+        {generalItems.map((item) => (
+          <li key={item.title}>
+            <NavLink
+              to={item.link}
+              className={({ isActive }) =>
+                (isActive
+                  ? 'text-accent selected bg-gradient-to-l from-[#debcff] from-10% to-transparent to-20 '
+                  : '') +
+                ` flex items-center gap-x-4 text-sm pl-8 mb-2 py-1 hover:text-accent hover:cursor-pointer trasition-all ease-in-out duration-300 ${
                   isCollapsed ? 'pr-8 ' : 'pr-16'
                 }`
               }
