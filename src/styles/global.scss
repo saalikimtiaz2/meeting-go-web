@@ -1,0 +1,21 @@
+// --------------Tailwind Imports------------
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Jost', sans-serif;
+}
+
+.selected {
+  @apply relative text-accent;
+  &::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 4px;
+    @apply bg-accent;
+  }
+}
