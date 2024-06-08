@@ -15,15 +15,27 @@ function SideBar() {
   };
 
   const menuItem = [
-    { icon: <IoHomeOutline size={26} />, title: 'Home', link: '/' },
-    { icon: <PiVideoConferenceThin size={26} />, title: 'Meeting', link: '/meeting' },
+    { icon: <IoHomeOutline size={isCollapsed ? 30 : 26} />, title: 'Home', link: '/' },
     {
-      icon: <IoIosNotificationsOutline size={26} />,
+      icon: <PiVideoConferenceThin size={isCollapsed ? 30 : 26} />,
+      title: 'Meeting',
+      link: '/meeting',
+    },
+    {
+      icon: <IoIosNotificationsOutline size={isCollapsed ? 30 : 26} />,
       title: 'Notifications',
       link: '/notifications',
     },
-    { icon: <CiCalendarDate size={26} />, title: 'Schedule', link: '/schedule' },
-    { icon: <IoSettingsOutline size={26} />, title: 'Settings', link: '/settings' },
+    {
+      icon: <CiCalendarDate size={isCollapsed ? 30 : 26} />,
+      title: 'Schedule',
+      link: '/schedule',
+    },
+    {
+      icon: <IoSettingsOutline size={isCollapsed ? 30 : 26} />,
+      title: 'Settings',
+      link: '/settings',
+    },
   ];
 
   return (
@@ -36,7 +48,7 @@ function SideBar() {
       </div>
       <button
         onClick={toggleCollapsed}
-        className={`h-10 w-10 rounded-full border border-gray-200 rotate-180 text-gray-500 text-lg bg-white absolute top-4 -right-4 flex items-center justify-center transition-all ease-in-out duration-300 hover:bg-grey-300 ${
+        className={`h-10 w-10 hover:scale-[1.1] rounded-full border border-gray-200 rotate-180 text-gray-500 text-lg bg-white absolute top-4 -right-5 flex items-center justify-center transition-all ease-in-out duration-300 hover:bg-gray-100 ${
           isCollapsed && 'rotate-0'
         }`}
       >
@@ -50,8 +62,8 @@ function SideBar() {
               to={item.link}
               className={({ isActive }) =>
                 (isActive ? 'text-accent selected bg-accent bg-opacity-10' : '') +
-                ` flex items-center gap-x-4 text-lg pl-6 mb-8 py-2 hover:text-accent hover:cursor-pointer trasition-all ease-in-out duration-300 ${
-                  isCollapsed ? 'pr-6 ' : 'pr-16'
+                ` flex items-center gap-x-4 text-lg pl-8 mb-8 py-2 hover:text-accent hover:cursor-pointer trasition-all ease-in-out duration-300 ${
+                  isCollapsed ? 'pr-8 ' : 'pr-16'
                 }`
               }
             >

@@ -15,7 +15,13 @@
     top: 0;
     bottom: 0;
     right: 0;
-    width: 4px;
-    @apply bg-accent;
+    width: 6px;
+    @apply bg-accent rounded-full;
   }
+}
+
+.cover {
+  background-image: url('/cover.jpg');
+  background-position: center;
+  background-size: cover;
 }

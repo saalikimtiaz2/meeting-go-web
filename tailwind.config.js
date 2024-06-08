@@ -1,6 +1,10 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    fontFamily: {
+      Montserrat: ['Montserrat', 'sans-serif'],
+      Oswald: ['Oswald', 'sans-serif'],
+    },
     screens: {
       xxs: '0px',
       xs: '250px',
