@@ -18,6 +18,9 @@ function Routers() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/meeting" element={<Meeting />} />
+          <Route path="/notifications" element={<Meeting />} />
+          <Route path="/schedule" element={<Meeting />} />
+          <Route path="/settings" element={<Meeting />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
