@@ -9,7 +9,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <Sidebar />
       <div className="grow ">
         <Header />
-        <div className="p-8">{children}</div>
+        <div className="p-8 bg-white">{children}</div>
       </div>
     </div>
   );
