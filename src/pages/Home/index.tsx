@@ -101,7 +101,7 @@ function HomePage() {
             </h3>
             <Calender />
           </div>
-          <div className="xs:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-5 p-4">
+          <div className="xs:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-5">
             <h3 className="text-gray-300 dark:text-gray-700 text-xl font-Oswald mb-3">
               Notifications
             </h3>
