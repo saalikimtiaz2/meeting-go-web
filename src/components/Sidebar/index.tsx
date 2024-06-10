@@ -74,7 +74,7 @@ function SideBar() {
 
   return (
     <div
-      className={`relative h-screen  py-5 transition-all ease-in-out duration-300 bg-secondary dark:bg-gray-900`}
+      className={`relative h-screen  py-5 transition-all ease-in-out duration-300 bg-secondary dark:bg-gray-950`}
     >
       <div className="flex items-center gap-1 font-semibold text-primary relative text-xl mb-10 justify-center pb-4">
         <SiGoogledisplayandvideo360 size={32} />

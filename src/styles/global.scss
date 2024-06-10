@@ -31,7 +31,7 @@
 .header {
   &::after {
     content: ' ';
-    @apply bg-gray-100 dark:bg-slate-800;
+    @apply bg-gray-100 dark:bg-slate-900;
     z-index: 0;
     position: absolute;
     bottom: -40px;
@@ -42,7 +42,7 @@
   }
   &::before {
     position: absolute;
-    @apply bg-secondary dark:bg-gray-900;
+    @apply bg-secondary dark:bg-gray-950;
     z-index: 0;
     content: ' ';
     bottom: -40px;
@@ -55,10 +55,10 @@
 .react-calendar {
   border: none !important;
   border-radius: 20px;
-  width: 100%;
+  width: 100% !important;
   overflow: hidden;
-  padding-bottom: 1em !important;
-  @apply bg-secondary dark:bg-slate-600 font-Oswald;
+  padding: 1em !important;
+  @apply bg-secondary dark:bg-slate-800 font-Oswald shadow-2xl;
 }
 .react-calendar__navigation__label {
   background-color: transparent !important;
@@ -109,11 +109,12 @@
 .react-calendar__navigation__label__labelText,
 .react-calendar__navigation__arrow {
   @apply text-black dark:text-white;
+  border-radius: 4px;
+
   &:hover {
     background-color: rgba($primary, 0.2) !important;
     color: $primary !important;
     border: 1px solid $primary !important;
-    border-radius: 4px;
   }
 }
 .react-calendar__navigation__arrow {
@@ -121,7 +122,7 @@
 }
 
 .react-calendar__navigation {
-  @apply border-b border-gray-200 dark:border-gray-500;
+  @apply gap-x-1;
 }
 .react-calendar__tile--now {
   background-color: $primary !important;
