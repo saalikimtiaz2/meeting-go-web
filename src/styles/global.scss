@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './colors';
+
 * {
   font-family: 'Jost', sans-serif;
 }
@@ -24,4 +26,110 @@
   background-image: url('/cover.jpg');
   background-position: center;
   background-size: cover;
+}
+
+.header {
+  &::after {
+    content: ' ';
+    @apply bg-gray-100 dark:bg-slate-800;
+    z-index: 0;
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    border-top-left-radius: 20px;
+  }
+  &::before {
+    position: absolute;
+    @apply bg-secondary dark:bg-gray-900;
+    z-index: 0;
+    content: ' ';
+    bottom: -40px;
+    left: 0;
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.react-calendar {
+  border: none !important;
+  border-radius: 20px;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 1em !important;
+  @apply bg-secondary dark:bg-slate-600 font-Oswald;
+}
+.react-calendar__navigation__label {
+  background-color: transparent !important;
+}
+.react-calendar__tile,
+.react-calendar__year-view__months__month {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.react-calendar__tile {
+  transition: all 0.2s ease-in-out;
+  border-radius: 4px;
+  border: 1px solid transparent !important;
+  @apply text-black dark:text-white;
+  &:hover {
+    background-color: rgba($primary, 0.2) !important;
+    color: $primary !important;
+    border: 1px solid $primary !important;
+  }
+}
+
+.react-calendar__tile--now {
+  background-color: $primary !important;
+  color: white !important;
+  border-radius: 4px;
+}
+
+.react-calendar__tile--active,
+.react-calendar__tile--hasActive {
+  background-color: rgba($primary, 0.2) !important;
+  color: $primary;
+  border: 1px solid $primary !important;
+  border-radius: 4px;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  opacity: 0.5;
+  &:hover {
+    background-color: transparent !important;
+    color: inherit;
+    border-radius: 4px;
+  }
+}
+.react-calendar__navigation__label__labelText {
+  padding: 0.5em;
+}
+.react-calendar__navigation__label__labelText,
+.react-calendar__navigation__arrow {
+  @apply text-black dark:text-white;
+  &:hover {
+    background-color: rgba($primary, 0.2) !important;
+    color: $primary !important;
+    border: 1px solid $primary !important;
+    border-radius: 4px;
+  }
+}
+.react-calendar__navigation__arrow {
+  background-color: rgba($primary, 0.2) !important;
+}
+
+.react-calendar__navigation {
+  @apply border-b border-gray-200 dark:border-gray-500;
+}
+.react-calendar__tile--now {
+  background-color: $primary !important;
+  border: 1px solid $primary !important;
+}
+
+abbr {
+  text-decoration: none !important;
+  padding-bottom: 1em !important;
+  @apply text-black dark:text-white lg:text-sm;
 }

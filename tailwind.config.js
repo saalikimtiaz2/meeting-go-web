@@ -1,5 +1,7 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  darkMode: 'class',
+  important: true,
   theme: {
     fontFamily: {
       Montserrat: ['Montserrat', 'sans-serif'],
@@ -18,6 +20,7 @@ module.exports = {
       colors: {
         primary: '#5C44F4',
         accent: '#8600fc',
+        secondary: '#e0e0ff',
       },
       gridTemplateColumns: {
         24: 'repeat(24, minmax(0, 1fr))',

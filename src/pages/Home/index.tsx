@@ -46,11 +46,11 @@ function HomePage() {
           </div>
         </div>
         <div className="grid grid-cols-12 mt-10 gap-6">
-          <div className="xs:col-span-12 md:col-span-8 grid grid-cols-12 gap-6">
+          <div className="xs:col-span-12 md:col-span-4 grid grid-cols-12 gap-6">
             {activites.map((item) => (
               <div
                 key={item.title}
-                className={`${item.bg} col-span-3 rounded-lg px-4 py-8 shadow-lg relative overflow-hidden`}
+                className={`${item.bg} col-span-6 rounded-lg px-4 py-8 shadow-lg relative overflow-hidden`}
               >
                 <div className="text-white text-xl flex items-center gap-x-4 font-Oswald whitespace-nowrap">
                   {item.icon}
@@ -66,7 +66,11 @@ function HomePage() {
             ))}
             <div className="col-span-12"></div>
           </div>
-          <div className="xs:col-span-12 md:col-span-4 flex justify-center">
+          <div className="xs:col-span-12 md:col-span-4 lg:col-span-5 p-4"></div>
+          <div className="xs:col-span-12 md:col-span-4 lg:col-span-3 p-4">
+            <h3 className="text-gray-300 dark:text-gray-700 text-xl font-Oswald mb-4">
+              Calender
+            </h3>
             <Calender />
           </div>
         </div>
