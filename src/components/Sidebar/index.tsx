@@ -74,20 +74,20 @@ function SideBar() {
 
   return (
     <div
-      className={`relative h-screen  py-5 transition-all ease-in-out duration-300 bg-secondary dark:bg-gray-950`}
+      className={`sticky top-0 h-screen  py-5 transition-all ease-in-out duration-300 bg-secondary dark:bg-gray-950 border-none z-50`}
     >
-      <div className="flex items-center gap-1 font-semibold text-primary relative text-xl mb-10 justify-center pb-4">
-        <SiGoogledisplayandvideo360 size={32} />
-        <span className={`${isCollapsed && 'absolute -left-[250px] '}`}>MeetingGo</span>
-      </div>
       <button
         onClick={toggleCollapsed}
-        className={`h-10 w-10 hover:scale-[1.1] z-10 rounded-full border border-gray-200 dark:border-gray-700 rotate-180 text-gray-500 text-lg bg-white dark:bg-gray-800 absolute top-4 -right-5 flex items-center justify-center transition-all ease-in-out duration-300 hover:bg-gray-100 ${
+        className={`h-10 w-10 hover:scale-[1.1] rounded-full border border-gray-200 dark:border-gray-700 rotate-180 text-gray-500 text-lg bg-white dark:bg-gray-800 absolute top-4 -right-5 flex items-center justify-center transition-all ease-in-out duration-300 hover:bg-gray-100 ${
           isCollapsed && 'rotate-0'
         }`}
       >
         <GoSidebarCollapse size={24} />
       </button>
+      <div className="flex items-center gap-1 font-semibold text-primary relative text-xl mb-10 justify-center pb-4 ">
+        <SiGoogledisplayandvideo360 size={32} />
+        <span className={`${isCollapsed && 'absolute -left-[250px] '}`}>MeetingGo</span>
+      </div>
 
       <ul className="pt-20">
         <li className="text-gray-400 dark:text-gray-700 text-md font-Oswald ml-8 mb-2">

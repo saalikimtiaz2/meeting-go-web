@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Home = lazy(() => import('pages/Home'));
 const Meeting = lazy(() => import('pages/Metting'));
+const Notifications = lazy(() => import('pages/Notifications'));
+const Settings = lazy(() => import('pages/Settings'));
 
 function Routers() {
   return (
@@ -16,12 +18,14 @@ function Routers() {
         }
       >
         <Routes>
+          {/* ----------Main---------------- */}
           <Route path="/" element={<Home />} />
           <Route path="/meeting" element={<Meeting />} />
-          <Route path="/notifications" element={<Meeting />} />
+          <Route path="/notifications" element={<Notifications />} />
           <Route path="/schedule" element={<Meeting />} />
           <Route path="/contacts" element={<Meeting />} />
-          <Route path="/settings" element={<Meeting />} />
+          {/* ----------Others---------------- */}
+          <Route path="/settings" element={<Settings />} />
           <Route path="/support" element={<Meeting />} />
           <Route path="/help" element={<Meeting />} />
         </Routes>

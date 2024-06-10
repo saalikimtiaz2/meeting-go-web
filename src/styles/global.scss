@@ -34,10 +34,10 @@
     @apply bg-gray-100 dark:bg-slate-900;
     z-index: 0;
     position: absolute;
-    bottom: -40px;
+    bottom: -30px;
     left: 0;
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     border-top-left-radius: 20px;
   }
   &::before {
@@ -45,10 +45,10 @@
     @apply bg-secondary dark:bg-gray-950;
     z-index: 0;
     content: ' ';
-    bottom: -40px;
+    bottom: -30px;
     left: 0;
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
   }
 }
 
