@@ -1,8 +1,11 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { PiUserLight } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
+
+import DialogBox from '../DialogBox';
 
 function ProfileDropdown({
   isCollapsed,
@@ -11,8 +14,32 @@ function ProfileDropdown({
   isCollapsed?: boolean;
   anchor: any;
 }) {
+  const [isDialogOpened, setIsDialogOpened] = useState<boolean>(false);
+
+  const toggleDialogOpen = () => {
+    setIsDialogOpened((prevState) => !prevState);
+  };
+
   return (
     <div>
+      <DialogBox isOpen={isDialogOpened} closeDialog={toggleDialogOpen}>
+        <h2 className="text-2xl text-red-500 font-semibold">Logout?</h2>
+        Are you sure you want to logout?
+        <div className="flex items-center justify-end gap-x-6">
+          <button
+            onClick={toggleDialogOpen}
+            className="w-32 py-2 rounded-md hover:bg-opacity-100 bg-opacity-70 bg-gray-500 text-white"
+          >
+            No
+          </button>
+          <button
+            onClick={toggleDialogOpen}
+            className="w-32 py-2 rounded-md hover:bg-opacity-100 bg-opacity-70 bg-red-500 text-white"
+          >
+            Yes
+          </button>
+        </div>
+      </DialogBox>
       <Menu>
         <MenuButton className=" border border-gray-500 w-full py-1 px-1 rounded-full flex items-center justify-between gap-x-4 text-medium hover:border-primary hover:bg-primary hover:text-white transition-all ease-in-out duration-300 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
           <div className="flex items-center gap-x-2">
@@ -60,13 +87,16 @@ function ProfileDropdown({
               </div>
             </div>
             <MenuItem>
-              <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-primary/50">
+              <Link
+                to="/profile"
+                className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-primary/50"
+              >
                 <PiUserLight size={24} className="fill-gray-600 dark:fill-white/50" />
                 Profile
                 <kbd className="ml-auto hidden font-sans text-xs text-gray-600 dark:text-white/50 group-data-[focus]:inline">
                   ⌘U
                 </kbd>
-              </button>
+              </Link>
             </MenuItem>
             <MenuItem>
               <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-primary/50">
@@ -83,7 +113,10 @@ function ProfileDropdown({
 
             <div className="pt-2 mt-2 border-t border-gray-100 dark:border-gray-600">
               <MenuItem>
-                <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-red-500 text-red-500 hover:text-white">
+                <button
+                  onClick={toggleDialogOpen}
+                  className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-red-500 text-red-500 hover:text-white"
+                >
                   <IoLogOutOutline size={24} />
                   Logout
                   <kbd className="ml-auto hidden font-sans text-xs group-data-[focus]:inline">
