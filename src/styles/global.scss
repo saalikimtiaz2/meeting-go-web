@@ -10,7 +10,8 @@
 }
 
 .selected {
-  @apply relative text-accent;
+  @apply relative;
+  color: $accent !important;
   &::after {
     content: ' ';
     position: absolute;
