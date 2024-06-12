@@ -99,7 +99,10 @@ function ProfileDropdown({
               </Link>
             </MenuItem>
             <MenuItem>
-              <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-primary/50">
+              <Link
+                to="/settings"
+                className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-primary/50"
+              >
                 <IoSettingsOutline
                   size={24}
                   className="text-gray-600 dark:text-white/50"
@@ -108,7 +111,7 @@ function ProfileDropdown({
                 <kbd className="ml-auto hidden font-sans text-xs text-gray-600 dark:text-white/50 group-data-[focus]:inline">
                   ⌘D
                 </kbd>
-              </button>
+              </Link>
             </MenuItem>
 
             <div className="pt-2 mt-2 border-t border-gray-100 dark:border-gray-600">

@@ -53,6 +53,12 @@
   }
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+// --------react calender-----------------
+
 .react-calendar {
   border: none !important;
   border-radius: 20px;

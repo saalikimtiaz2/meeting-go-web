@@ -3,6 +3,7 @@ import Layout from 'components/Layout';
 import GradualSpacing from 'components/MagicUI/GradualSpacing';
 import NumberTicker from 'components/MagicUI/NumberTicker';
 import AnimatedNotifications from 'components/Notifications';
+import { Heading2 } from 'components/Typography/Heading';
 import React from 'react';
 import { LuCalendarOff } from 'react-icons/lu';
 import { MdOutlineCalendarToday, MdPendingActions } from 'react-icons/md';
@@ -76,7 +77,7 @@ function HomePage() {
           </div>
         </div>
         <div className="grid grid-cols-12 mt-10 gap-6">
-          <div className="xs:col-span-12 md:col-span-6 lg:col-span-4 grid grid-cols-12 gap-6">
+          <div className="xs:col-span-12 lg:col-span-6 xl:col-span-4 grid grid-cols-12 gap-6">
             {activites.map((item) => (
               <div
                 key={item.title}
@@ -95,16 +96,12 @@ function HomePage() {
               </div>
             ))}
           </div>
-          <div className="xs:col-span-12 md:col-span-6 xl:col-span-3 ">
-            <h3 className="text-gray-300 dark:text-gray-700 text-xl font-Oswald mb-3">
-              Calender
-            </h3>
+          <div className="xs:col-span-12 lg:col-span-6 xl:col-span-3 ">
+            <Heading2 className="mb-3">Calender</Heading2>
             <Calender />
           </div>
-          <div className="xs:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-5">
-            <h3 className="text-gray-300 dark:text-gray-700 text-xl font-Oswald mb-3">
-              Notifications
-            </h3>
+          <div className="xs:col-span-12 lg:col-span-6 xl:col-span-5">
+            <Heading2 className="mb-3">Notifications</Heading2>
             <AnimatedNotifications notifications={notifications} repeat={1} />
           </div>
         </div>
