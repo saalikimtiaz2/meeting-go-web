@@ -1,4 +1,5 @@
 import Layout from 'components/Layout';
+import { Heading2 } from 'components/Typography/Heading';
 import React from 'react';
 import { CiCalendar, CiVideoOn } from 'react-icons/ci';
 import { IoAddOutline } from 'react-icons/io5';
@@ -7,7 +8,7 @@ import { SlScreenDesktop } from 'react-icons/sl';
 function Meeting() {
   return (
     <Layout>
-      <div>Meeting</div>
+      <Heading2 className="mb-4">Meetings</Heading2>
       <div className="grid grid-cols-12 gap-4">
         <button className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-orange-500 text-white text-left text-xl">
           <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
