@@ -51,7 +51,7 @@ function HomePage() {
       title: 'Pending meetings',
       total: 15,
       icon: <MdPendingActions size={30} />,
-      bg: 'bg-blue-500 bg-yellow-400',
+      bg: 'bg-orange-400',
     },
     {
       title: 'Canceled meetings',

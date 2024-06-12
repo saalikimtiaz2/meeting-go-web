@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Home = lazy(() => import('pages/Home'));
 const Meeting = lazy(() => import('pages/Metting'));
-const Profile = lazy(() => import('pages/Profile'));
+const Account = lazy(() => import('pages/Account'));
 const Schedule = lazy(() => import('pages/Schedule'));
 const Notifications = lazy(() => import('pages/Notifications'));
 const Settings = lazy(() => import('pages/Settings'));
@@ -23,7 +23,7 @@ function Routers() {
           {/* ----------Main---------------- */}
           <Route path="/" element={<Home />} />
           <Route path="/meeting" element={<Meeting />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/account" element={<Account />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/schedule" element={<Meeting />} />

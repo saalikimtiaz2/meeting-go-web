@@ -5,7 +5,7 @@ export const Heading2 = ({
   className,
 }: {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 }) => {
   return (
     <h2 className={`text-gray-400 dark:text-gray-500 text-xl font-Oswald ${className}`}>

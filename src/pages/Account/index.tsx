@@ -1,12 +1,12 @@
 import Layout from 'components/Layout';
 import React from 'react';
 
-function Profile() {
+function Account() {
   return (
     <Layout>
-      <div className="dark:text-white">Profile</div>
+      <div className="dark:text-white">Account</div>
     </Layout>
   );
 }
 
-export default Profile;
+export default Account;

@@ -88,7 +88,7 @@ function ProfileDropdown({
             </div>
             <MenuItem>
               <Link
-                to="/profile"
+                to="/account"
                 className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-primary/50"
               >
                 <PiUserLight size={24} className="fill-gray-600 dark:fill-white/50" />
