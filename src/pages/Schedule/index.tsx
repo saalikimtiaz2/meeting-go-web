@@ -25,11 +25,6 @@ const upcomingMeetings: meetingCardProps[] = [
   },
   {
     title: 'Daily Meeting',
-    time: 'Nov 11, 11:30am - 01:20pm',
-    tags: ['Meeting', 'Daily'],
-  },
-  {
-    title: 'Daily Meeting',
     time: 'Nov 12, 11:30am - 01:20pm',
     tags: ['Meeting', 'Daily'],
   },
@@ -42,11 +37,6 @@ const upcomingMeetings: meetingCardProps[] = [
     title: 'Design Goals',
     time: 'Nov 14, 11:30am - 01:20pm',
     tags: ['Meeting', 'Design'],
-  },
-  {
-    title: 'Agenda Review',
-    time: 'Nov 15, 11:30am - 01:20pm',
-    tags: ['Meeting', 'Daily'],
   },
 ];
 
@@ -101,10 +91,10 @@ const MeetingList: FC = () => {
     <Layout>
       <Heading2 className="mb-10">Upcoming Meetings</Heading2>
       <div className="grid grid-cols-12 xs:gap-4 lg:gap-4">
-        {[...upcomingMeetings, ...upcomingMeetings].map((meeting, idx) => (
+        {upcomingMeetings.map((meeting, idx) => (
           <div
             key={meeting.title + idx}
-            className="xs:col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2"
+            className="xs:col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-3"
           >
             <MeetingCard title={meeting.title} time={meeting.time} tags={meeting.tags} />
           </div>

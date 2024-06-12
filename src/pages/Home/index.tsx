@@ -39,19 +39,19 @@ function HomePage() {
       title: 'Schedule meetings',
       total: 45,
       icon: <PiUsersThree size={30} />,
-      bg: 'bg-green-500',
+      bg: ' bg-blue-500 ',
     },
     {
       title: 'Rescheduled meetings',
       total: 64,
       icon: <MdOutlineCalendarToday size={30} />,
-      bg: 'bg-yellow-400',
+      bg: 'bg-green-500',
     },
     {
       title: 'Pending meetings',
       total: 15,
       icon: <MdPendingActions size={30} />,
-      bg: 'bg-blue-500',
+      bg: 'bg-blue-500 bg-yellow-400',
     },
     {
       title: 'Canceled meetings',

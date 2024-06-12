@@ -43,6 +43,10 @@ const MeetingCard: FC<meetingCardProps> = ({ title, time, tags }) => {
               </span>
             ))}
           </div>
+          <p className="text-sm text-gray-800 dark:text-gray-300 mt-2">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus facilis
+            rem tenetur saepe ea beatae?
+          </p>
         </div>
         <div className="px-4 py-2 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between gap-x-2">
           <AvatarCircles numPeople={5} />
