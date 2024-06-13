@@ -68,6 +68,10 @@ const Call: React.FC<CallProps> = ({ callObject }) => {
     };
   }, [callObject]);
 
+  useEffect(() => {
+    console.log(participants);
+  }, []);
+
   return (
     <div className="call">
       {Object.entries(participants).map(([id, participant]) => (
