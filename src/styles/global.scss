@@ -57,6 +57,16 @@
   display: none;
 }
 
+.video-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9 !important;
+  min-width: 350px;
+}
+.placeholder-tile {
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+}
+
 // --------react calender-----------------
 
 .react-calendar {

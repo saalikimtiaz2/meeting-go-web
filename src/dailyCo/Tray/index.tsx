@@ -82,47 +82,47 @@ export default function Tray({ leaveCall }: { leaveCall: () => void }) {
       {/*   We're also passing down the toggleChat() function to the component, so we can open and close the chat */}
       {/*   from the chat UI and not just the Tray. */}
       <Chat showChat={showChat} toggleChat={toggleChat} />
-      <div className=" flex items-center justify-center gap-x-4 bg-black/50 backdrop-blur-sm rounded-full absolute left-1/2 -translate-x-1/2 bottom-4">
-        <div className="flex items-center">
+      <div className=" flex items-center justify-center gap-x-4 p-3 bg-black/50 backdrop-blur-sm rounded-full absolute left-1/2 -translate-x-1/2 bottom-4">
+        <div className="flex items-center gap-x-4">
           <TileButton
             onClick={toggleVideo}
             icon={mutedVideo ? <CiVideoOff /> : <CiVideoOn />}
             // text={mutedVideo ? 'Camera On' : 'Camera Off'}
-            iconClassName="bg-gray-500"
+            iconClassName="bg-gray-500 border-transparent"
           />
           <TileButton
             onClick={toggleAudio}
             icon={mutedAudio ? <CiMicrophoneOff /> : <CiMicrophoneOn />}
             // text={mutedAudio ? 'Unmute mic' : 'Mute mic'}
-            iconClassName="bg-gray-500 "
+            iconClassName="bg-gray-500 border-transparent "
           />
         </div>
-        <div className="flex items-center  px-8 mx-8">
+        <div className="flex items-center gap-x-4  px-8 mx-8">
           <TileButton
             onClick={toggleScreenShare}
             icon={<SlScreenDesktop />}
             // text={isSharingScreen ? 'Stop sharing screen' : 'Share screen'}
-            iconClassName="bg-green-500 "
+            iconClassName="bg-green-500 border-transparent "
           />
           <TileButton
             onClick={toggleMeetingInformation}
             icon={<SlInfo />}
             // text={showMeetingInformation ? 'Hide info' : 'Show info'}
-            iconClassName="bg-gray-500 "
+            iconClassName="bg-gray-500 border-transparent "
           />
           <TileButton
             onClick={toggleChat}
             icon={newChatMessage ? <BsChatText /> : <BsChatTextFill />}
             // text={showChat ? 'Hide chat' : 'Show chat'}
-            iconClassName="bg-gray-500 "
+            iconClassName="bg-gray-500 border-transparent"
           />
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-x-4">
           <TileButton
             onClick={leaveCall}
             icon={<RxExit />}
             // text="Leave call"
-            iconClassName="bg-red-500 "
+            iconClassName="bg-red-500 border-transparent "
           />
         </div>
       </div>
