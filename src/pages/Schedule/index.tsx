@@ -1,7 +1,7 @@
 import HistoryCard from 'components/Cards/HistoryCard';
 import MeetingCard from 'components/Cards/MeetingCard';
+import DashboardLayout from 'components/DashboardLayout';
 import DialogBox from 'components/HeadlessUI/DialogBox';
-import Layout from 'components/Layout';
 import { Heading2 } from 'components/Typography/Heading';
 import React, { FC, useState } from 'react';
 import { CiCalendar, CiVideoOn } from 'react-icons/ci';
@@ -107,7 +107,7 @@ const MeetingList: FC = () => {
   };
 
   return (
-    <Layout>
+    <DashboardLayout>
       <DialogBox isOpen={showClearHistoryDialog} closeDialog={toggleClearHistoryModal}>
         <h2 className="text-2xl text-red-500 font-semibold">Logout?</h2>
         Are you sure you want to logout?
@@ -215,7 +215,7 @@ const MeetingList: FC = () => {
           <p className="text-xl">No history!</p>
         </div>
       )}
-    </Layout>
+    </DashboardLayout>
   );
 };
 

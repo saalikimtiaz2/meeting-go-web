@@ -1,12 +1,12 @@
 import DashboardLayout from 'components/DashboardLayout';
 import React from 'react';
 
-function Account() {
+function Support() {
   return (
     <DashboardLayout>
-      <div className="dark:text-white">Account</div>
+      <div className="dark:text-white">Support</div>
     </DashboardLayout>
   );
 }
 
-export default Account;
+export default Support;

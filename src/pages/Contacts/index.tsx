@@ -4,7 +4,7 @@ import React from 'react';
 function Account() {
   return (
     <DashboardLayout>
-      <div className="dark:text-white">Account</div>
+      <div className="dark:text-white">COntacts</div>
     </DashboardLayout>
   );
 }

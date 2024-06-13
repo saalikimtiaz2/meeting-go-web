@@ -1,4 +1,4 @@
-import Layout from 'components/Layout';
+import DashboardLayout from 'components/DashboardLayout';
 import AnimatedNotifications from 'components/Notifications';
 import { Heading2 } from 'components/Typography/Heading';
 import React from 'react';
@@ -29,7 +29,7 @@ let notifications = [
 
 function Notifications() {
   return (
-    <Layout>
+    <DashboardLayout>
       <div className="grid grid-cols-12">
         <div className="xs:col-span-12 md:col-span-2 lg:cols-span-3" />
         <div className="xs:col-span-12 md:col-span-8 lg:cols-span-6">
@@ -37,7 +37,7 @@ function Notifications() {
           <AnimatedNotifications notifications={notifications} repeat={4} />
         </div>
       </div>
-    </Layout>
+    </DashboardLayout>
   );
 }
 

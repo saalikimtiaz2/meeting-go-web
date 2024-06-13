@@ -1,8 +1,8 @@
-import Layout from 'components/Layout';
+import DashboardLayout from 'components/DashboardLayout';
 import React from 'react';
 
 function Settings() {
-  return <Layout>Settings</Layout>;
+  return <DashboardLayout>Settings</DashboardLayout>;
 }
 
 export default Settings;

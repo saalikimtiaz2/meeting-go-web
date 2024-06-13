@@ -1,5 +1,5 @@
 import Calender from 'components/Calender';
-import Layout from 'components/Layout';
+import DashboardLayout from 'components/DashboardLayout';
 import GradualSpacing from 'components/MagicUI/GradualSpacing';
 import NumberTicker from 'components/MagicUI/NumberTicker';
 import AnimatedNotifications from 'components/Notifications';
@@ -33,7 +33,7 @@ let notifications = [
   },
 ];
 
-function HomePage() {
+function Dashboard() {
   const activites = [
     {
       title: 'Schedule meetings',
@@ -62,7 +62,7 @@ function HomePage() {
   ];
 
   return (
-    <Layout>
+    <DashboardLayout>
       <div>
         <GradualSpacing
           className="tracking-[-0.1em] text-black dark:text-gray-200 text-4xl font-medium text-left"
@@ -106,8 +106,8 @@ function HomePage() {
           </div>
         </div>
       </div>
-    </Layout>
+    </DashboardLayout>
   );
 }
 
-export default HomePage;
+export default Dashboard;

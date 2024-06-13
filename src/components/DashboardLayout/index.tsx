@@ -3,7 +3,7 @@ import React from 'react';
 
 import Sidebar from '../Sidebar';
 
-function Layout({
+function DashboardLayout({
   children,
   disableNav,
 }: {
@@ -21,4 +21,4 @@ function Layout({
   );
 }
 
-export default Layout;
+export default DashboardLayout;

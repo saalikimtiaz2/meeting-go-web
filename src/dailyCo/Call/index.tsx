@@ -69,7 +69,7 @@ const Call: React.FC<CallProps> = ({ callObject }) => {
   }, [callObject]);
 
   useEffect(() => {
-    console.log(participants);
+    console.log('Parti:', participants);
   }, []);
 
   return (

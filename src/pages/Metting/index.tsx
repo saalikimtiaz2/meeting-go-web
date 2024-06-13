@@ -1,7 +1,7 @@
 import DailyIframe, { DailyCall, DailyEvent } from '@daily-co/daily-js';
 import { DailyAudio, DailyProvider } from '@daily-co/daily-react';
 import api from 'api/dailyAPI';
-import Layout from 'components/Layout';
+import DashboardLayout from 'components/DashboardLayout';
 import Call from 'dailyCo/Call';
 import HairCheck from 'dailyCo/HairCheck';
 import HomeScreen from 'dailyCo/HomeScreen';
@@ -169,7 +169,7 @@ function Meeting() {
     return <HomeScreen createCall={createCall} startHairCheck={startHairCheck} />;
   };
 
-  return <Layout disableNav>{renderApp()}</Layout>;
+  return <DashboardLayout disableNav>{renderApp()}</DashboardLayout>;
 }
 
 export default Meeting;
