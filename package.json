@@ -11,7 +11,10 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@daily-co/daily-js": "^0.66.0",
+    "@daily-co/daily-react": "^0.19.0",
     "@headlessui/react": "^2.0.4",
+    "class-variance-authority": "^0.7.0",
     "react": "^18.3.1",
     "react-calendar": "^5.0.0",
     "react-dom": "^18.3.1",
@@ -20,6 +23,7 @@
     "react-multi-carousel": "^2.8.5",
     "react-router-dom": "^6.23.1",
     "react-toggle-dark-mode": "^1.1.1",
+    "recoil": "^0.7.7",
     "sass": "^1.77.4"
   },
   "devDependencies": {

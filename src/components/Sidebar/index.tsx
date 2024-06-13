@@ -9,13 +9,19 @@ import { PiUsersThree, PiVideoConferenceThin } from 'react-icons/pi';
 import { SiGoogledisplayandvideo360 } from 'react-icons/si';
 import { NavLink } from 'react-router-dom';
 
-function SideBar() {
+function SideBar({ disableNav }: { disableNav?: boolean }) {
   const getSidebarOpenedFromLocalStorage = () => {
     const value = localStorage.getItem('sidebarOpened');
     return value === 'true'; // Returns true if value is 'true', otherwise false
   };
 
   const [isCollapsed, setIsCollapsed] = useState(getSidebarOpenedFromLocalStorage());
+
+  useEffect(() => {
+    if (disableNav) {
+      setIsCollapsed(true);
+    }
+  }, []);
 
   // Use useEffect to ensure localStorage is synced if isCollapsed changes elsewhere
   useEffect(() => {

@@ -1,54 +1,175 @@
+import DailyIframe, { DailyCall, DailyEvent } from '@daily-co/daily-js';
+import { DailyAudio, DailyProvider } from '@daily-co/daily-react';
+import api from 'api/dailyAPI';
 import Layout from 'components/Layout';
-import { Heading2 } from 'components/Typography/Heading';
-import React from 'react';
-import { CiCalendar, CiVideoOn } from 'react-icons/ci';
-import { IoAddOutline } from 'react-icons/io5';
-import { SlScreenDesktop } from 'react-icons/sl';
+import Call from 'dailyCo/Call';
+import HairCheck from 'dailyCo/HairCheck';
+import HomeScreen from 'dailyCo/HomeScreen';
+import Tray from 'dailyCo/Tray';
+import { pageUrlFromRoomUrl, roomUrlFromPageUrl } from 'lib/utils';
+import React, { useCallback, useEffect, useState } from 'react';
+
+// App states
+const STATE_IDLE = 'STATE_IDLE';
+const STATE_CREATING = 'STATE_CREATING';
+const STATE_JOINING = 'STATE_JOINING';
+const STATE_JOINED = 'STATE_JOINED';
+const STATE_LEAVING = 'STATE_LEAVING';
+const STATE_ERROR = 'STATE_ERROR';
+const STATE_HAIRCHECK = 'STATE_HAIRCHECK';
 
 function Meeting() {
-  return (
-    <Layout>
-      <Heading2 className="mb-4">Meetings</Heading2>
-      <div className="grid grid-cols-12 gap-4">
-        <button className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-orange-500 text-white text-left text-xl">
-          <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
-            <CiVideoOn size={32} />
-          </div>
-          <div className="absolute bottom-6 right-6 opacity-10 -rotate-45 scale-[4]">
-            <CiVideoOn size={32} />
-          </div>
-          New Meeting
-        </button>
-        <button className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-blue-500 text-white text-left text-xl">
-          <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
-            <IoAddOutline size={32} />
-          </div>
-          <div className="absolute bottom-6 right-6 opacity-10   scale-[4]">
-            <IoAddOutline size={32} />
-          </div>
-          Join Meeitng
-        </button>
-        <button className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-red-500 text-white text-left text-xl">
-          <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
-            <CiCalendar size={32} />
-          </div>
-          <div className="absolute bottom-6 right-6 opacity-10 rotate-45 scale-[4]">
-            <CiCalendar size={32} />
-          </div>
-          Schedule
-        </button>
-        <button className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-green-500 text-white text-left text-xl">
-          <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
-            <SlScreenDesktop size={32} />
-          </div>
-          <div className="absolute bottom-6 right-6 opacity-10 rotate-45 scale-[4]">
-            <SlScreenDesktop size={32} />
-          </div>
-          Share Screen
-        </button>
-      </div>
-    </Layout>
+  const [appState, setAppState] = useState<string>(STATE_IDLE);
+  const [roomUrl, setRoomUrl] = useState<string | null>(null);
+  const [callObject, setCallObject] = useState<DailyCall | null>(null);
+  const [apiError, setApiError] = useState<boolean>(false);
+
+  const createCall = useCallback(() => {
+    setAppState(STATE_CREATING);
+    return api
+      .createRoom()
+      .then((room) => {
+        const url = room.url;
+        setRoomUrl(url);
+        return url;
+      })
+      .catch((error) => {
+        console.error('Error creating room', error);
+        setRoomUrl(null);
+        setAppState(STATE_IDLE);
+        setApiError(true);
+      });
+  }, []);
+
+  const startHairCheck = useCallback(async (url: string) => {
+    const newCallObject = DailyIframe.createCallObject();
+    setRoomUrl(url);
+    setCallObject(newCallObject);
+    setAppState(STATE_HAIRCHECK);
+    await newCallObject.preAuth({ url });
+    await newCallObject.startCamera();
+  }, []);
+
+  const joinCall = useCallback(
+    (userName: string) => {
+      if (callObject && roomUrl) {
+        callObject.join({ url: roomUrl, userName });
+      }
+    },
+    [callObject, roomUrl],
   );
+
+  const startLeavingCall = useCallback(() => {
+    if (!callObject) return;
+    if (appState === STATE_ERROR) {
+      callObject.destroy().then(() => {
+        setRoomUrl(null);
+        setCallObject(null);
+        setAppState(STATE_IDLE);
+      });
+    } else {
+      setAppState(STATE_LEAVING);
+      callObject.leave();
+    }
+  }, [callObject, appState]);
+
+  useEffect(() => {
+    const url = roomUrlFromPageUrl();
+    if (url) {
+      startHairCheck(url);
+    }
+  }, [startHairCheck]);
+
+  useEffect(() => {
+    const pageUrl = pageUrlFromRoomUrl(roomUrl || '');
+    if (pageUrl !== window.location.href) {
+      window.history.replaceState(null, '', pageUrl);
+    }
+  }, [roomUrl]);
+
+  useEffect(() => {
+    if (!callObject) return;
+
+    // Define the events array with proper typing
+    const events: DailyEvent[] = [
+      'joined-meeting',
+      'left-meeting',
+      'error',
+      'camera-error',
+    ];
+
+    const handleNewMeetingState = () => {
+      switch (callObject?.meetingState()) {
+        case 'joined-meeting':
+          setAppState(STATE_JOINED);
+          break;
+        case 'left-meeting':
+          callObject.destroy().then(() => {
+            setRoomUrl(null);
+            setCallObject(null);
+            setAppState(STATE_IDLE);
+          });
+          break;
+        case 'error':
+          setAppState(STATE_ERROR);
+          break;
+        default:
+          break;
+      }
+    };
+
+    handleNewMeetingState();
+
+    // Register event listeners
+    events.forEach((event) => callObject.on(event, handleNewMeetingState));
+
+    // Cleanup event listeners
+    return () => {
+      events.forEach((event) => callObject.off(event, handleNewMeetingState));
+    };
+  }, [callObject]);
+
+  const showCall =
+    !apiError && [STATE_JOINING, STATE_JOINED, STATE_ERROR].includes(appState);
+  const showHairCheck = !apiError && appState === STATE_HAIRCHECK;
+
+  const renderApp = () => {
+    if (apiError) {
+      return (
+        <div className="api-error">
+          <h1>Error</h1>
+          <p>
+            Room could not be created. Check if your `.env` file is set up correctly. For
+            more information, see the{' '}
+            <a href="https://github.com/daily-demos/custom-video-daily-react-hooks#readme">
+              readme
+            </a>{' '}
+            :)
+          </p>
+        </div>
+      );
+    }
+
+    if (showHairCheck || showCall) {
+      return (
+        <DailyProvider callObject={callObject}>
+          {showHairCheck ? (
+            <HairCheck joinCall={joinCall} cancelCall={startLeavingCall} />
+          ) : (
+            <>
+              <Call callObject={callObject} />
+              <Tray leaveCall={startLeavingCall} />
+              <DailyAudio />
+            </>
+          )}
+        </DailyProvider>
+      );
+    }
+
+    return <HomeScreen createCall={createCall} startHairCheck={startHairCheck} />;
+  };
+
+  return <Layout disableNav>{renderApp()}</Layout>;
 }
 
 export default Meeting;
