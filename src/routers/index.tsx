@@ -1,7 +1,9 @@
+import Loader from 'components/Loader';
 import React, { lazy, Suspense } from 'react';
-import { TailSpin } from 'react-loader-spinner';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import PrivateRouter from 'routers/middleware/PrivateRouter';
 
+const Home = lazy(() => import('pages/Home'));
 /* ---------------------------Auth Routes------------------------ */
 const Login = lazy(() => import('pages/Auth/Login'));
 const Signup = lazy(() => import('pages/Auth/Signup'));
@@ -19,27 +21,40 @@ const Help = lazy(() => import('pages/Help'));
 function Routers() {
   return (
     <BrowserRouter>
-      <Suspense
-        fallback={
-          <div className="tw-h-screen tw-w-screen tw-flex tw-items-center tw-justify-center tw-bg-primary">
-            <TailSpin width={100} height={100} color="#fff" />
-          </div>
-        }
-      >
+      <Suspense fallback={<Loader />}>
         <Routes>
+          <Route path="/" element={<Home />} />
           {/* ----------Auth Routers---------------- */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           {/* ----------Private Routers---------------- */}
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/meeting" element={<Meeting />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/schedule" element={<Schedule />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/support" element={<Support />} />
-          <Route path="/help" element={<Help />} />
+          <Route path="/dashboard" element={<PrivateRouter />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+          <Route path="/meeting" element={<PrivateRouter />}>
+            <Route path="/meeting" element={<Meeting />} />
+          </Route>
+          <Route path="/account" element={<PrivateRouter />}>
+            <Route path="/account" element={<Account />} />
+          </Route>
+          <Route path="/contacts" element={<PrivateRouter />}>
+            <Route path="/contacts" element={<Contacts />} />
+          </Route>
+          <Route path="/schedule" element={<PrivateRouter />}>
+            <Route path="/schedule" element={<Schedule />} />
+          </Route>
+          <Route path="/notifications" element={<PrivateRouter />}>
+            <Route path="/notifications" element={<Notifications />} />
+          </Route>
+          <Route path="/settings" element={<PrivateRouter />}>
+            <Route path="/settings" element={<Settings />} />
+          </Route>
+          <Route path="/support" element={<PrivateRouter />}>
+            <Route path="/support" element={<Support />} />
+          </Route>
+          <Route path="/help" element={<PrivateRouter />}>
+            <Route path="/help" element={<Help />} />
+          </Route>
         </Routes>
       </Suspense>
     </BrowserRouter>

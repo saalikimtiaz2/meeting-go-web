@@ -4,10 +4,12 @@ import GradualSpacing from 'components/MagicUI/GradualSpacing';
 import NumberTicker from 'components/MagicUI/NumberTicker';
 import AnimatedNotifications from 'components/Notifications';
 import { Heading2 } from 'components/Typography/Heading';
-import React from 'react';
+import { useAuth } from 'context/AuthContext';
+import React, { useEffect } from 'react';
 import { LuCalendarOff } from 'react-icons/lu';
 import { MdOutlineCalendarToday, MdPendingActions } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
+import Skeleton from 'react-loading-skeleton';
 
 let notifications = [
   {
@@ -34,6 +36,8 @@ let notifications = [
 ];
 
 function Dashboard() {
+  const { loading, user } = useAuth();
+
   const activites = [
     {
       title: 'Schedule meetings',
@@ -61,12 +65,18 @@ function Dashboard() {
     },
   ];
 
+  useEffect(() => {
+    if (!loading) {
+      console.log(user);
+    }
+  }, []);
+
   return (
     <DashboardLayout>
       <div>
         <GradualSpacing
-          className="tracking-[-0.1em] text-black dark:text-gray-200 text-4xl font-medium text-left"
-          text="Welcome back Salik!"
+          className="tracking-[-0.1em] text-gray-600 dark:text-gray-400 text-4xl font-medium text-left capitalize"
+          text={`Welcome back ${user?.user_metadata.name}!`}
         />
         <div className="cover  rounded-xl text-white  h-[250px] relative overflow-hidden drop-shadow-xl mt-4">
           <div className="absolute px-8 top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-black to-transparent flex flex-col justify-center">
@@ -85,7 +95,7 @@ function Dashboard() {
               >
                 <div className="text-white text-xl flex items-center gap-x-4 font-Oswald whitespace-nowrap">
                   {item.icon}
-                  {item.title}
+                  {item.title || <Skeleton />}
                 </div>
                 <p className="text-center mt-4 text-5xl font-semibold text-white font-Montserrat">
                   <NumberTicker value={item.total} />

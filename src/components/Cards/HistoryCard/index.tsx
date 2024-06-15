@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 type historyCardProps = {
   title: string;
@@ -20,9 +21,9 @@ const HistoryCard: FC<historyCardProps> = ({ title, time, tags, day, month }) =>
             </div>
           </div>
           <div className="grow">
-            <h4 className="text-lg font-semibold">{title}</h4>
+            <h4 className="text-lg font-semibold">{title || <Skeleton />}</h4>
             <div className="flex items-center justify-between">
-              <p className="text-gray-500 text-xs mt-1">{time}</p>
+              <p className="text-gray-500 text-xs mt-1">{time || <Skeleton />}</p>
               <div className="flex items-center gap-2 mt-2">
                 {tags.map((tag: string) => (
                   <span

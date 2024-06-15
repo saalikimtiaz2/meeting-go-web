@@ -13,6 +13,7 @@ import clsx from 'clsx';
 import { TileButton } from 'components/Buttons';
 import Drawer from 'components/Drawer';
 import { Heading2 } from 'components/Typography/Heading';
+import { useAuth } from 'context/AuthContext';
 import PlaceholderTile from 'dailyCo/PlaceholderTile';
 import UserMediaError from 'dailyCo/UserMediaError';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -46,6 +47,7 @@ export default function HairCheck({
     setSpeaker,
   } = useDevices();
   const callObject = useDaily();
+  const { user } = useAuth();
   const [username, setUsername] = useState(initialUsername);
   const [cameraOn, setCameraOn] = useState(true);
   const [micOn, setMicOn] = useState(true);
@@ -54,6 +56,7 @@ export default function HairCheck({
   const [getUserMediaError, setGetUserMediaError] = useState(false);
 
   useEffect(() => {
+    console.log(initialUsername);
     setUsername(initialUsername);
   }, [initialUsername]);
 

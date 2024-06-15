@@ -2,6 +2,7 @@ import Avatar from 'components/MagicUI/Avatar';
 import AvatarCircles from 'components/MagicUI/AvatarGroup';
 import React, { FC } from 'react';
 import { MdMoreVert } from 'react-icons/md';
+import Skeleton from 'react-loading-skeleton';
 
 type meetingCardProps = {
   title: string;
@@ -18,8 +19,8 @@ const MeetingCard: FC<meetingCardProps> = ({ title, time, tags }) => {
             <Avatar size={12} />
             <div className="grow flex justify-between items-start">
               <div>
-                <h4 className="text-lg font-semibold">{title}</h4>
-                <p className="text-gray-500 text-xs mt-1">{time}</p>
+                <h4 className="text-lg font-semibold">{title || <Skeleton />}</h4>
+                <p className="text-gray-500 text-xs mt-1">{time || <Skeleton />}</p>
               </div>
               <button className="text-gray-500">
                 <MdMoreVert size={24} />
@@ -46,13 +47,13 @@ const MeetingCard: FC<meetingCardProps> = ({ title, time, tags }) => {
                 }
                   `}
               >
-                {tag}
+                {tag || <Skeleton />}
               </span>
             ))}
           </div>
           <p className="text-sm text-gray-800 dark:text-gray-300 mt-2">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus facilis
-            rem tenetur saepe ea beatae?
+            {`Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus facilis
+            rem tenetur saepe ea beatae?` || <Skeleton count={2} />}
           </p>
         </div>
         <div className="px-4 py-2 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between gap-x-2">

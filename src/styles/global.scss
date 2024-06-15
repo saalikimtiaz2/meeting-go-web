@@ -52,6 +52,18 @@
     width: 30px;
   }
 }
+.active-nav-app {
+  &::after {
+    content: ' ';
+    z-index: 999;
+    position: absolute;
+    bottom: -0.9em;
+    left: 0;
+    right: 0;
+    height: 4px;
+    @apply rounded-xl bg-accent;
+  }
+}
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;

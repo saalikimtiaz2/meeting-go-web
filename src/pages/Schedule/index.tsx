@@ -194,7 +194,10 @@ const MeetingList: FC = () => {
       {meetingsHistory.length > 0 ? (
         <div className="grid grid-cols-12 xs:gap-4 lg:gap-4">
           {meetingsHistory.reverse().map((meeting, idx) => (
-            <div key={meeting.title + idx} className="xs:col-span-12 md:col-span-6">
+            <div
+              key={meeting.title + idx}
+              className="xs:col-span-12 md:col-span-6 xl:col-span-4"
+            >
               <HistoryCard
                 title={meeting.title}
                 time={meeting.time}

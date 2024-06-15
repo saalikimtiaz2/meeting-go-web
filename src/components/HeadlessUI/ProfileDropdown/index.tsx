@@ -1,11 +1,11 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react';
+import DialogBox from 'components/HeadlessUI/DialogBox';
+import { useAuth } from 'context/AuthContext';
 import React, { useState } from 'react';
 import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { PiUserLight } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
-
-import DialogBox from '../DialogBox';
 
 function ProfileDropdown({
   isCollapsed,
@@ -15,6 +15,10 @@ function ProfileDropdown({
   anchor: any;
 }) {
   const [isDialogOpened, setIsDialogOpened] = useState<boolean>(false);
+
+  const { user } = useAuth();
+
+  const { signOut } = useAuth();
 
   const toggleDialogOpen = () => {
     setIsDialogOpened((prevState) => !prevState);
@@ -44,12 +48,16 @@ function ProfileDropdown({
         <MenuButton className=" border border-gray-500 w-full py-1 px-1 rounded-full flex items-center justify-between gap-x-4 text-medium hover:border-primary hover:bg-primary hover:text-white transition-all ease-in-out duration-300 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
           <div className="flex items-center gap-x-2">
             <img
-              src="https://avatars.githubusercontent.com/u/16860528"
-              className="h-10 w-10 rounded-full"
+              src={user?.user_metadata?.avatar_url}
+              className="h-10 w-10 rounded-full object-cover object-center"
               alt="avatar"
             />
-            <p className={`${isCollapsed && 'absolute -left-[250px] font-medium'}`}>
-              Salik Imtiaz
+            <p
+              className={`${
+                isCollapsed && 'absolute -left-[250px] font-medium  capitalize'
+              }`}
+            >
+              {user?.user_metadata?.name}
             </p>
           </div>
           <span className={`${isCollapsed && 'absolute -left-[250px] font-medium'}`}>
@@ -74,14 +82,14 @@ function ProfileDropdown({
             <div className="p-2 mb-2  bg-gray-100 dark:bg-gray-600">
               <div className="flex items-center gap-x-2">
                 <img
-                  src="https://avatars.githubusercontent.com/u/16860528"
-                  className="h-10 w-10 rounded-full"
+                  src={user?.user_metadata?.avatar_url}
+                  className="h-10 w-10 rounded-full object-cover object-center"
                   alt="avatar"
                 />
-                <p className={`text-gray-800 dark:text-gray-200 leading-none`}>
-                  Salik Imtiaz
-                  <span className="block text-sm font-light text-gray-400">
-                    r.salikimtiaz@gmail.com
+                <p className={`text-gray-800 dark:text-gray-200 leading-none capitalize`}>
+                  {user?.user_metadata?.name}
+                  <span className="block text-sm font-light text-gray-400 lowercase">
+                    {user?.email}
                   </span>
                 </p>
               </div>
@@ -117,7 +125,7 @@ function ProfileDropdown({
             <div className="pt-2 mt-2 border-t border-gray-100 dark:border-gray-600">
               <MenuItem>
                 <button
-                  onClick={toggleDialogOpen}
+                  onClick={signOut}
                   className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-red-500 text-red-500 hover:text-white"
                 >
                   <IoLogOutOutline size={24} />

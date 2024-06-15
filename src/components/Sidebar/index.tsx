@@ -37,7 +37,7 @@ function SideBar({ disableNav }: { disableNav?: boolean }) {
     {
       icon: <IoHomeOutline size={isCollapsed ? 30 : 26} />,
       title: 'Dashboard',
-      link: '/',
+      link: '/dashboard',
     },
     {
       icon: <PiVideoConferenceThin size={isCollapsed ? 30 : 26} />,

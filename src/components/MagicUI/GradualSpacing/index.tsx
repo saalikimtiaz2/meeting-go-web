@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { cn } from 'lib/utils';
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 interface GradualSpacingProps {
   text: string;
@@ -35,7 +36,7 @@ export default function GradualSpacing({
           >
             {char === ' ' ? <span>&nbsp;</span> : char}
           </motion.h1>
-        ))}
+        )) || <Skeleton />}
       </AnimatePresence>
     </div>
   );
