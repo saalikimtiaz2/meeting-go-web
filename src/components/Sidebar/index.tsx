@@ -1,4 +1,5 @@
 import ProfileDropdown from 'components/HeadlessUI/ProfileDropdown';
+import Logo from 'components/Logo';
 import React, { useEffect, useState } from 'react';
 import { CiCalendarDate } from 'react-icons/ci';
 import { GoSidebarCollapse } from 'react-icons/go';
@@ -6,7 +7,6 @@ import { IoIosNotificationsOutline } from 'react-icons/io';
 import { IoHomeOutline, IoSettingsOutline } from 'react-icons/io5';
 import { MdOutlineHelpOutline, MdSupportAgent } from 'react-icons/md';
 import { PiUsersThree, PiVideoConferenceThin } from 'react-icons/pi';
-import { SiGoogledisplayandvideo360 } from 'react-icons/si';
 import { NavLink } from 'react-router-dom';
 
 function SideBar({ disableNav }: { disableNav?: boolean }) {
@@ -91,8 +91,8 @@ function SideBar({ disableNav }: { disableNav?: boolean }) {
       </button>
       <div>
         <div className="flex items-center gap-1 font-semibold text-primary relative text-xl mb-10 justify-center pb-4 ">
-          <SiGoogledisplayandvideo360 size={32} />
-          <span className={`${isCollapsed && 'absolute -left-[250px] '}`}>MeetingGo</span>
+          <Logo primaryOnly size={isCollapsed ? '40' : '30'} />
+          <span className={`${isCollapsed && 'absolute -left-[250px] '}`}>InterAct</span>
         </div>
 
         <ul className="pt-20">

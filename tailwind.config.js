@@ -5,6 +5,8 @@ module.exports = {
     fontFamily: {
       Montserrat: ['Montserrat', 'sans-serif'],
       Oswald: ['Oswald', 'sans-serif'],
+      Jost: ['Jost', 'sans-serif'],
+      Manrope: ['Manrope', 'sans-serif'],
     },
     screens: {
       xxs: '0px',
@@ -18,7 +20,7 @@ module.exports = {
     extend: {
       colors: {
         primary: '#5C44F4',
-        accent: '#8600fc',
+        accent: '#bf60ff',
         secondary: '#e0e0ff',
       },
       gridTemplateColumns: {

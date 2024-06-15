@@ -39,7 +39,7 @@ const SignUp = () => {
   return (
     <>
       <AppLayout>
-        <div className="h-full grid grid-cols-12">
+        <div className="min-h-screen grid grid-cols-12">
           <div
             className="xs:col-span-12 md:col-span-6 lg:col-span-8 xs:h-[25vh] md:h-full relative"
             style={{

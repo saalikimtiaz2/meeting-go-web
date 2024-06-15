@@ -75,7 +75,7 @@ function Dashboard() {
     <DashboardLayout>
       <div>
         <GradualSpacing
-          className="tracking-[-0.1em] text-gray-600 dark:text-gray-400 text-4xl font-medium text-left capitalize"
+          className="tracking-[-0.1em] text-gray-600 dark:text-gray-400 text-4xl font-medium text-left"
           text={`Welcome back ${user?.user_metadata.name}!`}
         />
         <div className="cover  rounded-xl text-white  h-[250px] relative overflow-hidden drop-shadow-xl mt-4">

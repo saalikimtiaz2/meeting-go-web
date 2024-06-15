@@ -1,6 +1,7 @@
 /* eslint-disable no-constant-condition */
 // SignIn.tsx
 import AppLayout from 'components/AppLayout';
+import Logo from 'components/Logo';
 import { Heading2 } from 'components/Typography/Heading';
 import { useAuth } from 'context/AuthContext';
 import React, { useEffect, useState } from 'react';
@@ -38,17 +39,20 @@ const SignIn = () => {
 
   return (
     <AppLayout>
-      <div className="h-full grid grid-cols-12">
+      <div className="min-h-screen grid grid-cols-12">
         <div
-          className="xs:col-span-12 md:col-span-6 lg:col-span-8 xs:h-[25vh] md:h-full relative"
+          className="xs:col-span-12 md:col-span-6 lg:col-span-8 xs:h-[25vh] md:h-full relative "
           style={{
             backgroundImage:
               'url(https://images.unsplash.com/photo-1622675363311-3e1904dc1885?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
           }}
         >
-          <div className="flex items-center justify-center flex-col absolute top-0 left-0 right-0 bottom-0 bg-primary/70 dark:bg-black/80">
-            <img src="logo/logo-white.png" className="xs:w-1/3 lg:w-1/4" alt="" />
-            <p className=" mt-4 font-Montserrat whitespace-nowrap transition ease-out text-white">
+          <div className="flex items-center justify-center flex-col absolute top-0 left-0 right-0 bottom-0 backdrop-blur-sm bg-primary/70 dark:bg-black/80">
+            <div className="flex items-end gap-x-4 text-white dark:text-primary text-[72px] leading-none font-medium">
+              <Logo size="70" />
+              InterAct
+            </div>
+            <p className=" mt-4 font-Montserrat whitespace-nowrap transition ease-out text-secondary">
               Connect Seamlessly, Collaborate Effortlessly
             </p>
           </div>
