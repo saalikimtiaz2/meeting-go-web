@@ -24,10 +24,13 @@ function AppHeader() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-10  px-8 flex items-center justify-between bg-black/20 backdrop-blur-sm transition-all duration-300 ease-in-out">
-      <div className="flex items-center gap-x-2 text-primary font-medium text-2xl">
+      <NavLink
+        to="/"
+        className="flex items-center gap-x-2 text-primary font-medium text-2xl"
+      >
         <Logo primaryOnly />
         InterAct
-      </div>
+      </NavLink>
       <ul className="flex items-center gap-x-6 text-white  text-lg">
         {isAuth && (
           <li className="relative">
