@@ -9,6 +9,10 @@
   font-family: 'Jost', sans-serif;
 }
 
+#num {
+  font-family: 'Manrope' sans-serif !important;
+}
+
 .selected {
   @apply relative;
   color: $accent !important;
@@ -53,15 +57,19 @@
   }
 }
 .active-nav-app {
+  @apply bg-black/50 backdrop-blur-sm;
+  color: white;
+  padding: 1rem;
+  transition: all 0.3s ease-in-out;
   &::after {
     content: ' ';
     z-index: 999;
     position: absolute;
-    bottom: -0.9em;
+    bottom: 0;
     left: 0;
     right: 0;
     height: 4px;
-    @apply rounded-xl bg-accent;
+    @apply rounded-xl bg-white/50;
   }
 }
 

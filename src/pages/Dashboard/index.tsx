@@ -9,7 +9,6 @@ import React, { useEffect } from 'react';
 import { LuCalendarOff } from 'react-icons/lu';
 import { MdOutlineCalendarToday, MdPendingActions } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
-import Skeleton from 'react-loading-skeleton';
 
 let notifications = [
   {
@@ -95,10 +94,10 @@ function Dashboard() {
               >
                 <div className="text-white text-xl flex items-center gap-x-4 font-Oswald whitespace-nowrap">
                   {item.icon}
-                  {item.title || <Skeleton />}
+                  {item.title}
                 </div>
-                <p className="text-center mt-4 text-5xl font-semibold text-white font-Montserrat">
-                  <NumberTicker value={item.total} />
+                <p className="text-center mt-4 text-5xl font-semibold text-white">
+                  <NumberTicker value={item.total} className="font-Manrope" />
                 </p>
                 <div className="absolute bottom-6 left-6 opacity-10 scale-[3.5] text-white">
                   {item.icon}

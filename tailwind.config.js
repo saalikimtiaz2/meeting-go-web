@@ -20,7 +20,7 @@ module.exports = {
     extend: {
       colors: {
         primary: '#5C44F4',
-        accent: '#bf60ff',
+        accent: '#a227f9',
         secondary: '#e0e0ff',
       },
       gridTemplateColumns: {
