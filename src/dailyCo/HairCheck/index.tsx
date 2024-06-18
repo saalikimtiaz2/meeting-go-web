@@ -48,7 +48,7 @@ export default function HairCheck({
   } = useDevices();
   const callObject = useDaily();
   const { user } = useAuth();
-  const [username, setUsername] = useState(initialUsername);
+  const [username, setUsername] = useState(user?.user_metadata?.name);
   const [cameraOn, setCameraOn] = useState(true);
   const [micOn, setMicOn] = useState(true);
   const [openSettingDrwawer, setOpenSettingDrwawer] = useState<boolean>(false);
@@ -56,9 +56,8 @@ export default function HairCheck({
   const [getUserMediaError, setGetUserMediaError] = useState(false);
 
   useEffect(() => {
-    console.log(initialUsername);
-    setUsername(initialUsername);
-  }, [initialUsername]);
+    setUsername(user?.user_metadata?.name);
+  }, [user?.user_metadata?.name]);
 
   useDailyEvent(
     'camera-error',
@@ -117,7 +116,7 @@ export default function HairCheck({
       <Drawer
         isOpen={openSettingDrwawer}
         closeDrawer={toggleSettingDrawer}
-        className="p-4 top-0 bottom-0"
+        className="p-4 -top-4 bottom-0 z-40"
         title="Settings"
       >
         <div className="mb-2">
@@ -236,6 +235,11 @@ export default function HairCheck({
                   <PlaceholderTile />
                 )}
               </div>
+              <div className="absolute bottom-4 left-4 bg-black/20 text-white rounded-2xl py-2 px-4 text-sm  flex items-center gap-x-2">
+                {user?.user_metadata?.name}
+                {micOn ? <CiMicrophoneOn /> : <CiMicrophoneOff />}
+                {cameraOn ? <CiVideoOn /> : <CiVideoOff />}
+              </div>
               <div className="absolute bottom-2 left-1/2 p-3 gap-x-2 -translate-x-1/2 bg-black/30 backdrop-blur-md flex items-center justify-center rounded-full">
                 <TileButton
                   onClick={toggleCamera}
@@ -256,17 +260,6 @@ export default function HairCheck({
             </div>
           </div>
           <div className="xs:col-span-12 md:col-span-12 flex flex-col items-center justify-center">
-            <div>
-              <label htmlFor="username">Your name:</label>
-              <input
-                name="username"
-                type="text"
-                placeholder="Enter username"
-                onChange={handleChange}
-                value={username || ' '}
-              />
-            </div>
-
             <div className="flex items-center gap-x-4 mt-4">
               <button
                 onClick={cancelCall}

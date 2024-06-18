@@ -29,6 +29,7 @@ function Meeting() {
     return api
       .createRoom()
       .then((room) => {
+        console.log('roomURL', room);
         const url = room.url;
         setRoomUrl(url);
         return url;

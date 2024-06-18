@@ -11,11 +11,13 @@ function DashboardLayout({
   disableNav?: boolean;
 }) {
   return (
-    <div className="flex">
-      <Sidebar disableNav={disableNav} />
-      <div className="grow bg-gray-100 dark:bg-slate-900 min-h-screen text-gray-900 dark:text-gray-200 overflow-x-hidden">
-        <DashboardHeader />
-        <div className="p-8 ">{children}</div>
+    <div className="dashboard-layout-wrapper">
+      <DashboardHeader />
+      <div className="dashboard-container">
+        <Sidebar disableNav={disableNav} />
+        <div className="relative w-full grow px-0 bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-gray-200  pt-[70px] overflow-y-scroll">
+          <div className="p-8">{children}</div>
+        </div>
       </div>
     </div>
   );

@@ -168,7 +168,7 @@ const MeetingList: FC = () => {
       </div>
 
       <Heading2 className="my-8">Upcoming Meetings</Heading2>
-      <div className="grid grid-cols-12 xs:gap-4 lg:gap-4">
+      <div className="grid grid-cols-12 gap-4">
         {upcomingMeetings.map((meeting, idx) => (
           <div
             key={meeting.title + idx}
@@ -192,7 +192,7 @@ const MeetingList: FC = () => {
       </div>
 
       {meetingsHistory.length > 0 ? (
-        <div className="grid grid-cols-12 xs:gap-4 lg:gap-4">
+        <div className="grid grid-cols-12 gap-4">
           {meetingsHistory.reverse().map((meeting, idx) => (
             <div
               key={meeting.title + idx}

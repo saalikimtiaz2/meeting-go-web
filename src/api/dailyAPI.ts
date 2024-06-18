@@ -4,13 +4,14 @@
  */
 async function createRoom() {
   const exp = Math.round(Date.now() / 1000) + 60 * 10;
+  console.log(exp);
   const options = {
     properties: {
       exp,
     },
   };
 
-  const isLocal = import.meta.env.VITE_APP_DAILY && 'local';
+  const isLocal = import.meta.env.VITE_APP_DAILY && true;
   const endpoint = isLocal
     ? 'https://api.daily.co/v1/rooms/'
     : `${window.location.origin}/api/rooms`;

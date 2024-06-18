@@ -1,11 +1,12 @@
 import Calender from 'components/Calender';
 import DashboardLayout from 'components/DashboardLayout';
+import Loader from 'components/Loader';
 import GradualSpacing from 'components/MagicUI/GradualSpacing';
 import NumberTicker from 'components/MagicUI/NumberTicker';
 import AnimatedNotifications from 'components/Notifications';
 import { Heading2 } from 'components/Typography/Heading';
 import { useAuth } from 'context/AuthContext';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { LuCalendarOff } from 'react-icons/lu';
 import { MdOutlineCalendarToday, MdPendingActions } from 'react-icons/md';
 import { PiUsersThree } from 'react-icons/pi';
@@ -63,13 +64,7 @@ function Dashboard() {
       bg: 'bg-red-600',
     },
   ];
-
-  useEffect(() => {
-    if (!loading) {
-      console.log(user);
-    }
-  }, []);
-
+  if (loading) return <Loader />;
   return (
     <DashboardLayout>
       <div>
