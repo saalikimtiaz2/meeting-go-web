@@ -71,7 +71,7 @@ export default function HairCheck({
     callObject?.setUserName(e.target.value);
   };
 
-  const handleJoin = (e: any) => {
+  const handleJoin = (e?: any) => {
     e.preventDefault();
     joinCall(username?.trim());
   };
@@ -108,6 +108,10 @@ export default function HairCheck({
   const toggleSettingDrawer = () => {
     setOpenSettingDrwawer((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    joinCall(username?.trim());
+  }, []);
 
   return getUserMediaError ? (
     <UserMediaError />

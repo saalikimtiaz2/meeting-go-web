@@ -5,11 +5,15 @@ import {
   useLocalSessionId,
   useParticipantProperty,
 } from '@daily-co/daily-react';
-import React, { useCallback, useState } from 'react';
+import Avatar from 'components/MagicUI/Avatar';
+import { Heading2 } from 'components/Typography/Heading';
+import React, { useCallback, useEffect, useState } from 'react';
+import { IoCloseOutline } from 'react-icons/io5';
 
 interface Message {
   msg: string;
   name: string;
+  userId: string;
 }
 
 export default function Chat({
@@ -23,6 +27,7 @@ export default function Chat({
   const [inputValue, setInputValue] = useState<string>('');
   const localSessionId = useLocalSessionId();
   const username = useParticipantProperty(localSessionId, 'user_name');
+  const userId = useParticipantProperty(localSessionId, 'user_id');
 
   const sendAppMessage = useAppMessage({
     onAppMessage: useCallback(
@@ -32,6 +37,7 @@ export default function Chat({
           {
             msg: ev.data.msg,
             name: ev.data.name,
+            userId: ev.data.userId,
           },
         ]),
       [],
@@ -43,13 +49,14 @@ export default function Chat({
       const newMessage = {
         msg: message,
         name: username || 'Guest',
+        userId: userId,
       };
 
       sendAppMessage(newMessage, '*');
 
       setMessages((prevMessages) => [...prevMessages, newMessage]);
     },
-    [sendAppMessage, username],
+    [sendAppMessage, username, userId],
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,32 +70,53 @@ export default function Chat({
     setInputValue('');
   };
 
+  useEffect(() => {
+    console.log('Messages: ', messages);
+  }, [messages]);
+
   return showChat ? (
-    <aside className="chat">
-      <button onClick={toggleChat} className="close-chat" type="button">
-        Close chat
-      </button>
-      <ul className="chat-messages">
-        {messages.map((message, index) => (
-          <li key={`message-${index}`} className="chat-message">
-            <span className="chat-message-author">{message?.name}</span>:
-            <p className="chat-message-body">{message?.msg}</p>
-          </li>
-        ))}
-      </ul>
-      <div className="add-message">
-        <form className="chat-form" onSubmit={handleSubmit}>
-          <input
-            className="chat-input"
-            type="text"
-            placeholder="Type your message here.."
-            value={inputValue}
-            onChange={handleChange}
-          />
-          <button type="submit" className="chat-submit-button">
-            {/* <Arrow /> */}
+    <aside className="chat flex flex-col gap-y-4 w-full">
+      <div className="h-2/5 w-full bg-secondary dark:bg-gray-950 rounded-xl overflow-hidden p-4 ">
+        <div className="flex items-center justify-between">
+          <Heading2>Participent</Heading2>
+          <button onClick={toggleChat} className="text-gray-500 " type="button">
+            <IoCloseOutline size={30} />
           </button>
-        </form>
+        </div>
+        hello
+      </div>
+      <div className="h-3/5 w-full bg-secondary dark:bg-gray-950 rounded-xl overflow-hidden p-4">
+        <Heading2 className="mb-4">Live Chat</Heading2>
+        <ul className="chat-messages">
+          {messages.map((message, index) => (
+            <li
+              key={`message-${index}`}
+              className={`bg-gray-700 p-2 rounded-xl flex items-start gap-x-4 mb-1 w-4/5 ${
+                userId === message.userId && 'ml-auto flex-row-reverse'
+              }`}
+            >
+              <span className="chat-message-author">
+                <Avatar size={8} />
+                {/* {message?.name} */}
+              </span>
+              <p className="chat-message-body grow">{message?.msg}</p>
+            </li>
+          ))}
+        </ul>
+        <div className="add-message">
+          <form onSubmit={handleSubmit}>
+            <input
+              className="w-full p-2 rounded-xl bg-gray-100 dark:bg-gray-800"
+              type="text"
+              placeholder="Type your message here.."
+              value={inputValue}
+              onChange={handleChange}
+            />
+            <button type="submit" className="chat-submit-button">
+              {/* <Arrow /> */}
+            </button>
+          </form>
+        </div>
       </div>
     </aside>
   ) : null;

@@ -5,7 +5,6 @@ import DashboardLayout from 'components/DashboardLayout';
 import Call from 'dailyCo/Call';
 import HairCheck from 'dailyCo/HairCheck';
 import HomeScreen from 'dailyCo/HomeScreen';
-import Tray from 'dailyCo/Tray';
 import { pageUrlFromRoomUrl, roomUrlFromPageUrl } from 'lib/utils';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -29,7 +28,6 @@ function Meeting() {
     return api
       .createRoom()
       .then((room) => {
-        console.log('roomURL', room);
         const url = room.url;
         setRoomUrl(url);
         return url;
@@ -158,8 +156,7 @@ function Meeting() {
             <HairCheck joinCall={joinCall} cancelCall={startLeavingCall} />
           ) : (
             <>
-              <Call callObject={callObject} />
-              <Tray leaveCall={startLeavingCall} />
+              <Call callObject={callObject} startLeavingCall={startLeavingCall} />
               <DailyAudio />
             </>
           )}

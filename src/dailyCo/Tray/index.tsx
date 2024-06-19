@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import 'styles/video.scss';
 
 import {
@@ -9,7 +10,6 @@ import {
   useVideoTrack,
 } from '@daily-co/daily-react';
 import { TileButton } from 'components/Buttons';
-import Chat from 'dailyCo/Chat';
 import MeetingInformation from 'dailyCo/MeetingInformation';
 import React, { useCallback, useState } from 'react';
 import { BsChatText, BsChatTextFill } from 'react-icons/bs';
@@ -17,13 +17,23 @@ import { CiMicrophoneOff, CiMicrophoneOn, CiVideoOff, CiVideoOn } from 'react-ic
 import { RxExit } from 'react-icons/rx';
 import { SlInfo, SlScreenDesktop } from 'react-icons/sl';
 
-export default function Tray({ leaveCall }: { leaveCall: () => void }) {
+export default function Tray({
+  leaveCall,
+  toggleChat,
+  showChat,
+  newChatMessage,
+  setNewChatMessage,
+}: {
+  leaveCall: () => void;
+  toggleChat: () => void;
+  showChat: boolean;
+  newChatMessage: boolean;
+  setNewChatMessage: (item: boolean) => void;
+}) {
   const callObject = useDaily();
   const { isSharingScreen, startScreenShare, stopScreenShare } = useScreenShare();
 
   const [showMeetingInformation, setShowMeetingInformation] = useState(false);
-  const [showChat, setShowChat] = useState(false);
-  const [newChatMessage, setNewChatMessage] = useState(false);
 
   const localSessionId = useLocalSessionId();
   const localVideo = useVideoTrack(localSessionId);
@@ -58,13 +68,6 @@ export default function Tray({ leaveCall }: { leaveCall: () => void }) {
     setShowMeetingInformation(!showMeetingInformation);
   };
 
-  const toggleChat = () => {
-    setShowChat(!showChat);
-    if (newChatMessage) {
-      setNewChatMessage(!newChatMessage);
-    }
-  };
-
   return (
     <div className="overflow-hidden ">
       <div
@@ -81,8 +84,7 @@ export default function Tray({ leaveCall }: { leaveCall: () => void }) {
 
       {/*   We're also passing down the toggleChat() function to the component, so we can open and close the chat */}
       {/*   from the chat UI and not just the Tray. */}
-      <Chat showChat={showChat} toggleChat={toggleChat} />
-      <div className=" flex items-center justify-center gap-x-4 p-3 bg-black/50 backdrop-blur-sm rounded-full absolute left-1/2 -translate-x-1/2 bottom-4">
+      <div className=" flex items-center justify-center gap-x-4 p-3 bg-white/10 backdrop-blur-sm rounded-full absolute left-1/2 -translate-x-1/2 bottom-4">
         <div className="flex items-center gap-x-4">
           <TileButton
             onClick={toggleVideo}

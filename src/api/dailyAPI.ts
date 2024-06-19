@@ -4,7 +4,6 @@
  */
 async function createRoom() {
   const exp = Math.round(Date.now() / 1000) + 60 * 10;
-  console.log(exp);
   const options = {
     properties: {
       exp,

@@ -15,8 +15,8 @@ function DashboardLayout({
       <DashboardHeader />
       <div className="dashboard-container">
         <Sidebar disableNav={disableNav} />
-        <div className="relative w-full grow px-0 bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-gray-200  pt-[70px] overflow-y-scroll">
-          <div className="p-8">{children}</div>
+        <div className="relative w-full h-screen grow px-0 bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-gray-200  pt-[70px] overflow-y-scroll">
+          <div className="p-8 h-full">{children}</div>
         </div>
       </div>
     </div>

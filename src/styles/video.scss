@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .app {
   background-color: var(--darkest-blue);
   min-height: 100vh;
@@ -79,11 +83,10 @@ video {
 .chat {
   background: var(--white);
   position: absolute;
-  top: 4rem;
-  bottom: 4rem;
+  top: 0;
+  bottom: 0;
   right: 0;
   overflow-y: auto;
-  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -98,15 +101,13 @@ video {
 }
 
 .add-message {
-  padding: 1rem;
   border-top: 1px solid var(--grey);
   border-bottom: 1px solid var(--grey);
 }
 
 .chat-messages {
-  padding: 1rem;
   margin: 0;
-  height: 100%;
+  height: 78%;
   overflow-y: auto;
 }
 
@@ -128,48 +129,26 @@ video {
   font-size: 14px;
 }
 
-.chat-form {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 2px solid var(--grey);
-}
-
-.chat-input {
-  background: transparent;
-  border: 0;
-  flex-grow: 1;
-  padding: 0.5rem;
-}
-
-.chat-submit-button {
-  background: transparent;
-}
-
-.close-chat {
-  background: var(--turquoise);
-  border: 1px solid var(--grey);
-  padding: 0.5rem 1rem;
-  margin: 1rem;
-  align-self: end;
-  font-weight: normal;
-}
-
-.close-chat:hover {
-  background: var(--grey);
-  border: 1px solid var(--dark-blue-border);
-}
-
 // --------------------------------------------------- Tile
+.spotlight-tile {
+  margin: 0 auto;
+  height: 100% !important;
+  width: fit-content !important;
+}
+
 .tile-video {
+  @apply bg-gray-400 dark:bg-gray-600 rounded-xl;
   position: relative;
-  width: 480px;
-  height: 270px;
+  width: 180px;
+}
+
+.small-tile {
+  aspect-ratio: 16 / 9 !important;
 }
 
 @media only screen and (max-width: 600px) {
   .tile-video {
-    width: 240px;
-    height: 135px;
+    width: 130px;
   }
 }
 
@@ -184,10 +163,6 @@ video {
     width: 240px;
     height: 135px;
   }
-}
-
-.no-video {
-  background-color: var(--dark-blue-border);
 }
 
 .no-video video {
@@ -212,40 +187,3 @@ video {
   grid-column: 1 / -1;
   grid-row: 1;
 }
-
-// --------------------------------------------------- UserName
-
-.username {
-  position: absolute;
-  z-index: 2;
-  color: var(--grey);
-  background-color: var(--dark-blue);
-  bottom: 0;
-  left: 0;
-  font-size: 14px;
-  padding: 0.2em 0.5em;
-}
-
-// --------------------------------------------------- HOme Screen
-
-.home-screen {
-  padding: 0 1rem;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-  justify-content: center;
-  text-align: center;
-}
-
-.home-screen h1 {
-  color: var(--white);
-  font-weight: bold;
-}
-
-.home-screen p {
-  color: var(--grey);
-}
-
-// --------------------------------------------------- Media Error
