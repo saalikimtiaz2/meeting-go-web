@@ -5,7 +5,7 @@ import Sidebar from '../Sidebar';
 
 function DashboardLayout({
   children,
-  disableNav,
+  disableNav = false,
 }: {
   children: React.ReactNode;
   disableNav?: boolean;
