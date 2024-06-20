@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import 'styles/video.scss';
 
+import PlaceholderTile from 'dailyCo/PlaceholderTile';
 import Username from 'dailyCo/Username';
 import React, { FC } from 'react';
 import { PiResizeThin } from 'react-icons/pi';
@@ -47,14 +48,17 @@ const Tile: FC<TileProps> = ({
 
   return (
     <div
-      className={`${containerCssClasses} ${
-        isSpotlightTile ? ' spotlight-tile' : ' small-tile mb-4'
-      }`}
+      className={`${containerCssClasses} bg-gray-500 flex items-end justify-center  ${
+        isSpotlightTile ? ' spotlight-tile' : ' small-tile mb-4 shadow-2xl'
+      } 
+        ${!videoTrack && !isScreenShare && 'full-width-video'}
+        ${!videoTrack && !isScreenShare && !isSpotlightTile && 'no-full-width-video'}
+       `}
     >
       {!isSpotlightTile && (
-        <div className="bg-black/50 flex items-center justify-center p-2 rounded-full absolute top-4 right-4 z-50">
+        <div className="bg-black/50 flex items-center justify-center p-1.5 rounded-full absolute top-2 right-2 z-50">
           <button className="text-white" onClick={() => setSpotlightTile(id)}>
-            <PiResizeThin size={26} />
+            <PiResizeThin size={22} />
           </button>
         </div>
       )}
@@ -72,6 +76,10 @@ const Tile: FC<TileProps> = ({
           playsInline
           ref={(audio) => audio && (audio.srcObject = new MediaStream([audioTrack]))}
         />
+      )}
+
+      {!videoTrack && !isScreenShare && (
+        <PlaceholderTile isSpotlightTile={isSpotlightTile} />
       )}
       {/* Additional rendering logic for isScreenShare, isLocal, and isAlone */}
       {/* <DailyVideo

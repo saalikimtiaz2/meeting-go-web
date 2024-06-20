@@ -112,12 +112,17 @@ export default function Tray({
             // text={showMeetingInformation ? 'Hide info' : 'Show info'}
             iconClassName="bg-gray-500 border-transparent "
           />
-          <TileButton
-            onClick={toggleChat}
-            icon={newChatMessage ? <BsChatText /> : <BsChatTextFill />}
-            // text={showChat ? 'Hide chat' : 'Show chat'}
-            iconClassName="bg-gray-500 border-transparent"
-          />
+          <div className="relative">
+            {newChatMessage && (
+              <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-600" />
+            )}
+            <TileButton
+              onClick={toggleChat}
+              icon={newChatMessage ? <BsChatTextFill /> : <BsChatText />}
+              // text={showChat ? 'Hide chat' : 'Show chat'}
+              iconClassName="bg-gray-500 border-transparent"
+            />
+          </div>
         </div>
         <div className="flex items-center gap-x-4">
           <TileButton

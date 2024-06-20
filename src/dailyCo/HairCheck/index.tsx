@@ -59,6 +59,11 @@ export default function HairCheck({
     setUsername(user?.user_metadata?.name);
   }, [user?.user_metadata?.name]);
 
+  useEffect(() => {
+    setUsername(user?.user_metadata?.name);
+    callObject?.setUserData({ avatar_url: user?.user_metadata?.avatar_url || '' });
+  }, [user, callObject]);
+
   useDailyEvent(
     'camera-error',
     useCallback(() => {
@@ -66,10 +71,10 @@ export default function HairCheck({
     }, []),
   );
 
-  const handleChange = (e: any) => {
-    setUsername(e.target.value);
-    callObject?.setUserName(e.target.value);
-  };
+  // const handleChange = (e: any) => {
+  //   setUsername(e.target.value);
+  //   callObject?.setUserName(e.target.value);
+  // };
 
   const handleJoin = (e?: any) => {
     e.preventDefault();

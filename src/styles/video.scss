@@ -100,11 +100,6 @@ video {
   }
 }
 
-.add-message {
-  border-top: 1px solid var(--grey);
-  border-bottom: 1px solid var(--grey);
-}
-
 .chat-messages {
   margin: 0;
   height: 78%;
@@ -114,19 +109,36 @@ video {
 .chat-message {
   list-style-type: none;
   margin-bottom: 1rem;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background-color: rgba(121, 121, 121, 0.5);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #00398f93;
+  }
 }
 
-.chat-message-author {
-  font-weight: bold;
-  font-size: 14px;
-}
+#scorllbar1 {
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
 
-.chat-message-body {
-  text-align: left;
-  margin: 0;
-  display: inline;
-  color: var(--dark-grey);
-  font-size: 14px;
+  &::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background-color: rgba(121, 121, 121, 0.5);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #00398f93;
+  }
 }
 
 // --------------------------------------------------- Tile
@@ -136,32 +148,30 @@ video {
   width: fit-content !important;
 }
 
+.no-full-width-video {
+  width: 70% !important;
+}
+.full-width-video {
+  width: 100% !important;
+}
+
 .tile-video {
   @apply bg-gray-400 dark:bg-gray-600 rounded-xl;
   position: relative;
-  width: 180px;
+  width: 220px;
+  height: 124px;
 }
 
 .small-tile {
   aspect-ratio: 16 / 9 !important;
+  border-radius: 10px !important;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 600px) {
   .tile-video {
     width: 130px;
-  }
-}
-
-.self-view {
-  width: 480px;
-  height: 270px;
-  position: relative;
-}
-
-@media only screen and (max-width: 600px) {
-  .self-view {
-    width: 240px;
-    height: 135px;
+    height: 73px;
   }
 }
 

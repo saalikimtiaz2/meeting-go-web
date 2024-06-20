@@ -5,6 +5,10 @@
 
 @import './colors';
 
+#root {
+  @apply bg-secondary dark:bg-gray-950;
+}
+
 * {
   font-family: 'Jost', sans-serif;
 }
@@ -99,16 +103,6 @@
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
-}
-
-.video-placeholder {
-  width: 100%;
-  aspect-ratio: 16 / 9 !important;
-  min-width: 350px;
-}
-.placeholder-tile {
-  width: 100% !important;
-  aspect-ratio: 16 / 9 !important;
 }
 
 // --------react calender-----------------

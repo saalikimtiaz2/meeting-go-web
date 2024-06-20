@@ -10,11 +10,22 @@ interface CallProps {
   startLeavingCall: () => void;
 }
 
+interface UserData {
+  avatar_url: string;
+}
+
 interface ParticipantTracks {
   videoTrack: MediaStreamTrack | null;
   audioTrack: MediaStreamTrack | null;
   isLocal: boolean;
   isOwner: boolean;
+  userName: string;
+  userId: string;
+  audioStatus: string;
+  videoStatus: string;
+  screenShareStatus: string;
+  isSpotlited: boolean;
+  avatarURL: string;
 }
 
 interface ParticipantState {
@@ -66,16 +77,22 @@ const Call: React.FC<CallProps> = ({ callObject, startLeavingCall }) => {
       const participantsState: ParticipantState = {};
       const dailyParticipants = callObject.participants();
 
-      console.log('dailyParti: ', dailyParticipants);
-
       for (const [id, participant] of Object.entries<DailyParticipant>(
         dailyParticipants,
       )) {
+        const userData = participant.userData as UserData;
         participantsState[id] = {
           videoTrack: participant.tracks.video?.track || null,
           audioTrack: participant.tracks.audio?.track || null,
           isLocal: participant.local,
           isOwner: participant.owner,
+          userName: participant.user_name,
+          userId: participant.user_id,
+          audioStatus: participant.tracks.audio.state,
+          videoStatus: participant.tracks.video.state,
+          screenShareStatus: participant.tracks.screenVideo.state,
+          isSpotlited: participant.user_id === spotlightUser,
+          avatarURL: userData?.avatar_url,
         };
       }
 
@@ -118,7 +135,7 @@ const Call: React.FC<CallProps> = ({ callObject, startLeavingCall }) => {
               );
             }
           })}
-          <div className="absolute top-0 right-0 h-full flex">
+          <div className="absolute top-1 right-1 bottom-1 flex xs:w-[130px] md:w-[240px] flex-col items-end">
             {Object.entries(participants).map(([id, participant]) => {
               if (id !== spotlightUser) {
                 return (
@@ -136,18 +153,20 @@ const Call: React.FC<CallProps> = ({ callObject, startLeavingCall }) => {
               }
             })}
           </div>
+          <Tray
+            leaveCall={startLeavingCall}
+            toggleChat={toggleChat}
+            showChat={showChat}
+            newChatMessage={newChatMessage}
+            setNewChatMessage={toggleNewChat}
+          />
         </div>
-        <div className={`${showChat ? 'col-span-3' : 'col-span-0'}  h-full relative`}>
-          <Chat showChat={showChat} toggleChat={toggleChat} />
+        <div
+          className={`${showChat ? 'col-span-3' : 'col-span-0 hidden'}  h-full relative`}
+        >
+          <Chat showChat={showChat} toggleChat={toggleChat} participants={participants} />
         </div>
       </div>
-      <Tray
-        leaveCall={startLeavingCall}
-        toggleChat={toggleChat}
-        showChat={showChat}
-        newChatMessage={newChatMessage}
-        setNewChatMessage={toggleNewChat}
-      />
     </>
   );
 };
