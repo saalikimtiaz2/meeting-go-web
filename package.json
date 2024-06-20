@@ -15,6 +15,7 @@
     "@daily-co/daily-react": "^0.19.0",
     "@headlessui/react": "^2.0.4",
     "@supabase/supabase-js": "^2.43.4",
+    "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "react": "^18.3.1",
     "react-calendar": "^5.0.0",
@@ -23,7 +24,9 @@
     "react-loader-spinner": "^5.4.5",
     "react-loading-skeleton": "^3.4.0",
     "react-multi-carousel": "^2.8.5",
+    "react-multi-email": "^1.0.23",
     "react-router-dom": "^6.23.1",
+    "react-toastify": "^10.0.5",
     "react-toggle-dark-mode": "^1.1.1",
     "recoil": "^0.7.7",
     "sass": "^1.77.4"

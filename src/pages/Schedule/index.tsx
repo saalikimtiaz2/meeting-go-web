@@ -1,12 +1,20 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-autofocus */
 import HistoryCard from 'components/Cards/HistoryCard';
 import MeetingCard from 'components/Cards/MeetingCard';
 import DashboardLayout from 'components/DashboardLayout';
 import DialogBox from 'components/HeadlessUI/DialogBox';
+import ReactMultiInputEmail from 'components/ReactMultiInputEmail';
 import { Heading2 } from 'components/Typography/Heading';
+// import { useAuth } from 'context/AuthContext';
+import useScheduleMeeting from 'hooks/Meeting/useScheduleMeeing';
 import React, { FC, useState } from 'react';
 import { CiCalendar, CiVideoOn } from 'react-icons/ci';
 import { IoAddOutline } from 'react-icons/io5';
 import { SlScreenDesktop } from 'react-icons/sl';
+import { TailSpin } from 'react-loader-spinner';
 
 type meetingCardProps = {
   title: string;
@@ -90,12 +98,25 @@ const history: historyCardProps[] = [
   },
 ];
 
-const MeetingList: FC = () => {
+const Schedule: FC = () => {
+  // const { user } = useAuth();
+  const { loading, scheduleMeeting } = useScheduleMeeting();
+
   const [showClearHistoryDialog, setShowClearHistoryDialog] = useState<boolean>(false);
   const [meetingsHistory, setMeetingsHistory] = useState<historyCardProps[]>([
     ...history,
     ...history,
   ]);
+
+  const [showCreateRoomDialog, setShowCreateRoomDialog] = useState<boolean>(false);
+  const [roomName, setRoomName] = useState<string>('');
+  const [dateTime, setDateTime] = useState('');
+  const [duration, setDuration] = useState(15);
+  const [invitedUsers, setInvitedUsers] = useState<string[]>([]);
+
+  const toggleCreateRoomDialog = () => {
+    setShowCreateRoomDialog((prevState) => !prevState);
+  };
 
   const toggleClearHistoryModal = () => {
     setShowClearHistoryDialog((prevState) => !prevState);
@@ -106,8 +127,113 @@ const MeetingList: FC = () => {
     toggleClearHistoryModal();
   };
 
+  const handleScheduleMeeting = (e: any) => {
+    e.preventDefault();
+    scheduleMeeting({
+      roomName,
+      dateTime,
+      duration,
+      email: invitedUsers,
+    });
+  };
+
   return (
     <DashboardLayout>
+      {/* -------------------------------------Clear History DIalog---------------------------------------------- */}
+
+      <DialogBox
+        isOpen={showCreateRoomDialog}
+        closeDialog={toggleCreateRoomDialog}
+        title="Scedule New Meeting"
+        discription="Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, reprehenderit?"
+      >
+        <form className="mt-6">
+          <label htmlFor="name" className="text-lg font-Oswald text-gray-500">
+            Meeting Title
+            <input
+              type="name"
+              placeholder="Sprint Planning, Daily Meeting, etc."
+              value={roomName}
+              onChange={(e) => setRoomName(e.target.value)}
+            />
+          </label>
+          <label htmlFor="description" className="text-lg font-Oswald text-gray-500">
+            Dscription
+            <textarea
+              placeholder="Sprint Planning, Daily Meeting, etc."
+              value={roomName}
+              name="Enter your description here..."
+              rows={2}
+              onChange={(e) => setRoomName(e.target.value)}
+            />
+          </label>
+          <label
+            htmlFor="dateTime"
+            className="block text-lg font-Oswald text-gray-500 mb-2"
+          >
+            Date and Time
+            <input
+              id="dateTime"
+              className=""
+              type="datetime-local"
+              value={dateTime}
+              onChange={(e) => setDateTime(e.target.value)}
+              required
+            />
+            {/* <Calendar
+              id="dateTime"
+              onChange={setDateTime}
+              value={dateTime}
+              minDate={new Date()}
+              className="border-2 bg-black/5 dark:bg-white/20 border-gray-200 dark:border-gray-700 w-full py-2.5 font-Montserrat text-black dark:text-gray-200 outline-none text-base rounded-xl px-4 mb-2 focus:border-primary dark:focus:border-primary transition-all ease-in-out duration-300"
+            /> */}
+          </label>
+          <label
+            htmlFor="invitedUsers"
+            className="block text-lg font-Oswald text-gray-500 mb-2"
+          >
+            Duration
+            <select
+              value={duration}
+              onChange={(e) => setDuration(Number(e.target.value))}
+            >
+              <option value={15}>15</option>
+              <option value={30}>30</option>
+              <option value={45}>45</option>
+              <option value={60}>60</option>
+            </select>
+          </label>
+          <label
+            htmlFor="invitedUsers"
+            className="block text-lg font-Oswald text-gray-500 mb-2"
+          >
+            Add Guests
+            <ReactMultiInputEmail
+              emails={invitedUsers}
+              setEmails={(e) => setInvitedUsers(e)}
+            />
+          </label>
+          <div className="flex justify-end items-center gap-x-4">
+            <button
+              type="button"
+              onClick={toggleCreateRoomDialog}
+              className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-black text-white"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-4 py-2 rounded bg-green-400 hover:bg-green-600 text-white"
+              onClick={(e) => handleScheduleMeeting(e)}
+            >
+              {loading ? <TailSpin width={20} color="white" /> : 'Schedule'}
+            </button>
+          </div>
+        </form>
+      </DialogBox>
+
+      {/* -------------------------------------Clear History DIalog---------------------------------------------- */}
       <DialogBox isOpen={showClearHistoryDialog} closeDialog={toggleClearHistoryModal}>
         <h2 className="text-2xl text-red-500 font-semibold">Logout?</h2>
         Are you sure you want to logout?
@@ -147,7 +273,10 @@ const MeetingList: FC = () => {
           </div>
           Join Meeitng
         </button>
-        <button className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-red-500 text-white text-left text-xl">
+        <button
+          onClick={toggleCreateRoomDialog}
+          className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-red-500 text-white text-left text-xl"
+        >
           <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
             <CiCalendar size={32} />
           </div>
@@ -222,4 +351,4 @@ const MeetingList: FC = () => {
   );
 };
 
-export default MeetingList;
+export default Schedule;

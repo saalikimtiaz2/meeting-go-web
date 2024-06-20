@@ -2,11 +2,12 @@ import {
   Description,
   Dialog,
   DialogPanel,
-  DialogTitle,
   Transition,
   TransitionChild,
 } from '@headlessui/react';
+import { Heading2 } from 'components/Typography/Heading';
 import React, { FC } from 'react';
+import { MdClose } from 'react-icons/md';
 
 type DialogProps = {
   isOpen: boolean;
@@ -36,8 +37,14 @@ const DialogBox: FC<DialogProps> = ({
               leaveFrom="opacity-100 transform-[scale(100%)] translate-y-0"
               leaveTo="opacity-0 transform-[scale(95%)] translate-y-full"
             >
-              <DialogPanel className="max-w-lg w-full space-y-4 rounded-xl xs:p-6 lg:p-12  bg-secondary dark:bg-gray-700 text-black dark:text-gray-200">
-                {title && <DialogTitle className="font-bold">{title}</DialogTitle>}
+              <DialogPanel className="relative max-w-lg w-full space-y-4 rounded-xl xs:p-6 bg-white dark:bg-gray-700 text-black dark:text-gray-200">
+                <button
+                  onClick={closeDialog}
+                  className="absolute xs:top-10 xs:right-8 text-gray-500 hover:text-black dark:hover:text-white"
+                >
+                  <MdClose size={30} />
+                </button>
+                {title && <Heading2 className="mb-4">{title}</Heading2>}
                 {discription && <Description>{discription}</Description>}
                 {children}
               </DialogPanel>

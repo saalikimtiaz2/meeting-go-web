@@ -5,6 +5,16 @@
 
 @import './colors';
 
+input,
+textarea,
+select {
+  resize: none;
+  padding: 0.5em !important;
+  font-family: 'Montserrat' sans-serif !important;
+  font-weight: 400 !important;
+  @apply border-2 bg-black/5 dark:bg-white/20 border-gray-200 dark:border-gray-700 w-full py-2.5 font-Montserrat text-black dark:text-gray-200 outline-none text-base rounded-xl px-4 mb-2 focus:border-primary dark:focus:border-primary transition-all ease-in-out duration-300;
+}
+
 #root {
   @apply bg-secondary dark:bg-gray-950;
 }
@@ -188,4 +198,15 @@ abbr {
   text-decoration: none !important;
   padding-bottom: 1em !important;
   @apply text-black dark:text-white lg:text-sm;
+}
+
+// ------------------------------react multi input------------------------------------
+.data-labels {
+  width: 100%;
+  display: flex !important;
+  align-items: center;
+}
+.react-multi-email {
+  display: flex;
+  flex-direction: column-reverse;
 }

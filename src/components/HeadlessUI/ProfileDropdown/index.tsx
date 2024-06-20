@@ -3,9 +3,40 @@ import DialogBox from 'components/HeadlessUI/DialogBox';
 import { useAuth } from 'context/AuthContext';
 import React, { useState } from 'react';
 import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import {
+  MdKeyboardArrowRight,
+  MdOutlineHelpOutline,
+  MdSupportAgent,
+} from 'react-icons/md';
 import { PiUserLight } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
+
+const menuItems = [
+  {
+    icon: <PiUserLight size={24} className="fill-gray-600 dark:fill-white/50" />,
+    title: 'Profile',
+    link: '/profile',
+    shortcut: '⌘U',
+  },
+  {
+    icon: <IoSettingsOutline size={24} className="fill-gray-600 dark:fill-white/50" />,
+    title: 'Setting',
+    link: '/setting',
+    shortcut: '⌘M',
+  },
+  {
+    icon: <MdSupportAgent size={24} className="fill-gray-600 dark:fill-white/50" />,
+    title: 'Support',
+    link: '/support',
+    shortcut: '⌘L',
+  },
+  {
+    icon: <MdOutlineHelpOutline size={24} className="fill-gray-600 dark:fill-white/50" />,
+    title: 'Help',
+    link: '/help',
+    shortcut: '⌘H',
+  },
+];
 
 function ProfileDropdown({
   isCollapsed,
@@ -94,33 +125,20 @@ function ProfileDropdown({
                 </p>
               </div>
             </div>
-            <MenuItem>
-              <Link
-                to="/account"
-                className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-primary/50"
-              >
-                <PiUserLight size={24} className="fill-gray-600 dark:fill-white/50" />
-                Profile
-                <kbd className="ml-auto hidden font-sans text-xs text-gray-600 dark:text-white/50 group-data-[focus]:inline">
-                  ⌘U
-                </kbd>
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link
-                to="/settings"
-                className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-primary/50"
-              >
-                <IoSettingsOutline
-                  size={24}
-                  className="text-gray-600 dark:text-white/50"
-                />
-                Setting
-                <kbd className="ml-auto hidden font-sans text-xs text-gray-600 dark:text-white/50 group-data-[focus]:inline">
-                  ⌘D
-                </kbd>
-              </Link>
-            </MenuItem>
+            {menuItems.map((item) => (
+              <MenuItem key={item.title}>
+                <Link
+                  to={item.link}
+                  className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-primary/50"
+                >
+                  {item.icon}
+                  {item.title}
+                  <kbd className="ml-auto hidden font-sans text-xs text-gray-600 dark:text-white/50 group-data-[focus]:inline">
+                    {item.shortcut}
+                  </kbd>
+                </Link>
+              </MenuItem>
+            ))}
 
             <div className="pt-2 mt-2 border-t border-gray-100 dark:border-gray-600">
               <MenuItem>
