@@ -20,7 +20,7 @@ const links = [
 ];
 
 function AppHeader() {
-  const { isAuth } = useAuth();
+  const { user } = useAuth();
 
   return (
     <div className="fixed top-0 left-0 right-0 z-10  px-8 flex items-center justify-between bg-black/20 backdrop-blur-sm transition-all duration-300 ease-in-out">
@@ -32,7 +32,7 @@ function AppHeader() {
         InterAct
       </NavLink>
       <ul className="flex items-center gap-x-6 text-white  text-lg">
-        {isAuth && (
+        {user && (
           <li className="relative">
             <NavLink
               className={({ isActive }) =>
@@ -46,7 +46,7 @@ function AppHeader() {
             </NavLink>
           </li>
         )}
-        {!isAuth &&
+        {!user &&
           links.map((item) => (
             <li key={item.title} className="relative">
               <NavLink

@@ -3,16 +3,13 @@ import AppLayout from 'components/AppLayout';
 import Logo from 'components/Logo';
 import { Heading2 } from 'components/Typography/Heading';
 import { useAuth } from 'context/AuthContext';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const SignUp = () => {
-  const { signUp, signInWithGoogle, isAuth } = useAuth();
+  const { signUp, signInWithGoogle } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-
-  const navigate = useNavigate();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,12 +27,6 @@ const SignUp = () => {
       console.error('Error signing in with Google', error);
     }
   };
-
-  useEffect(() => {
-    if (isAuth) {
-      navigate('/dashboard');
-    }
-  }, [isAuth]);
 
   return (
     <>

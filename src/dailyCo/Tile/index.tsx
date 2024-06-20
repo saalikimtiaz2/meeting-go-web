@@ -16,6 +16,7 @@ interface TileProps {
   videoTrack: MediaStreamTrack | null;
   audioTrack: MediaStreamTrack | null;
   isSpotlightTile?: boolean;
+  username: string;
   setSpotlightTile: (userId: string) => void;
 }
 
@@ -28,6 +29,7 @@ const Tile: FC<TileProps> = ({
   audioTrack,
   isSpotlightTile = false,
   setSpotlightTile,
+  username,
 }) => {
   // const videoState = useVideoTrack(id);
 
@@ -56,9 +58,9 @@ const Tile: FC<TileProps> = ({
        `}
     >
       {!isSpotlightTile && (
-        <div className="bg-black/50 flex items-center justify-center p-1.5 rounded-full absolute top-2 right-2 z-50">
+        <div className="bg-black/50 flex items-center justify-center p-2 rounded-full absolute top-2 right-2 z-50">
           <button className="text-white" onClick={() => setSpotlightTile(id)}>
-            <PiResizeThin size={22} />
+            <PiResizeThin size={20} />
           </button>
         </div>
       )}
@@ -87,7 +89,7 @@ const Tile: FC<TileProps> = ({
         sessionId={id}
         type={isScreenShare ? 'screenVideo' : 'video'}
       /> */}
-      {!isScreenShare && <Username id={id} isLocal={isLocal} />}
+      {!isScreenShare && <Username id={id} isLocal={isLocal} userName={username} />}
     </div>
   );
 };

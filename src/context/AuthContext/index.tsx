@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-// AuthContext.tsx
 import { User } from '@supabase/supabase-js';
 import { supabase } from 'helpers/supabaseClient';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
@@ -11,7 +10,6 @@ interface AuthContextType {
   signOut: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   loading: boolean;
-  isAuth: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -19,7 +17,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -39,14 +36,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user || null);
-      if (session?.user) {
-        setIsAuth(true);
-      }
       setLoading(false);
     });
 
     return () => {
-      authListener.subscription.unsubscribe();
+      authListener?.subscription?.unsubscribe();
     };
   }, []);
 
@@ -75,7 +69,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
-    setIsAuth(false);
     setUser(null);
   };
 
@@ -86,7 +79,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, signUp, signIn, signOut, signInWithGoogle, loading, isAuth }}
+      value={{ user, signUp, signIn, signOut, signInWithGoogle, loading }}
     >
       {children}
     </AuthContext.Provider>

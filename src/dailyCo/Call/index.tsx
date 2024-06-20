@@ -12,6 +12,7 @@ interface CallProps {
 
 interface UserData {
   avatar_url: string;
+  name: string;
 }
 
 interface ParticipantTracks {
@@ -25,6 +26,7 @@ interface ParticipantTracks {
   videoStatus: string;
   screenShareStatus: string;
   isSpotlited: boolean;
+  username: string;
   avatarURL: string;
 }
 
@@ -77,6 +79,8 @@ const Call: React.FC<CallProps> = ({ callObject, startLeavingCall }) => {
       const participantsState: ParticipantState = {};
       const dailyParticipants = callObject.participants();
 
+      console.log('dailyParti: ', dailyParticipants);
+
       for (const [id, participant] of Object.entries<DailyParticipant>(
         dailyParticipants,
       )) {
@@ -84,6 +88,7 @@ const Call: React.FC<CallProps> = ({ callObject, startLeavingCall }) => {
         participantsState[id] = {
           videoTrack: participant.tracks.video?.track || null,
           audioTrack: participant.tracks.audio?.track || null,
+          username: participant.user_name,
           isLocal: participant.local,
           isOwner: participant.owner,
           userName: participant.user_name,
@@ -131,6 +136,7 @@ const Call: React.FC<CallProps> = ({ callObject, startLeavingCall }) => {
                   isAlone={Object.entries(participants).length === 1}
                   isSpotlightTile={spotlightUser === id}
                   setSpotlightTile={changeSpotlightUser}
+                  username={participant.username}
                 />
               );
             }
@@ -148,6 +154,7 @@ const Call: React.FC<CallProps> = ({ callObject, startLeavingCall }) => {
                     isAlone={Object.entries(participants).length === 1}
                     isSpotlightTile={spotlightUser === id}
                     setSpotlightTile={changeSpotlightUser}
+                    username={participant.username}
                   />
                 );
               }

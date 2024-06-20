@@ -1,7 +1,9 @@
 import Loader from 'components/Loader';
+import AuthCallback from 'pages/AuthCallback';
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PrivateRouter from 'routers/middleware/PrivateRouter';
+import PublicRoute from 'routers/middleware/PublicRouter';
 
 const Home = lazy(() => import('pages/Home'));
 /* ---------------------------Auth Routes------------------------ */
@@ -23,10 +25,26 @@ function Routers() {
     <BrowserRouter>
       <Suspense fallback={<Loader />}>
         <Routes>
+          <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/" element={<Home />} />
-          {/* ----------Auth Routers---------------- */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+
+          {/* ----------Private Routers---------------- */}
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <PublicRoute>
+                <Signup />
+              </PublicRoute>
+            }
+          />
           {/* ----------Private Routers---------------- */}
           <Route path="/dashboard" element={<PrivateRouter />}>
             <Route path="/dashboard" element={<Dashboard />} />

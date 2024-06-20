@@ -7,7 +7,7 @@ import {
 } from '@daily-co/daily-react';
 import Avatar from 'components/MagicUI/Avatar';
 import { Heading2 } from 'components/Typography/Heading';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
 
 interface Message {
@@ -95,10 +95,6 @@ export default function Chat({
     sendMessage(inputValue);
     setInputValue('');
   };
-
-  useEffect(() => {
-    console.log('Messages: ', messages);
-  }, [messages]);
 
   return showChat ? (
     <aside className="chat flex flex-col gap-y-4 w-full">

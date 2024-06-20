@@ -61,7 +61,10 @@ export default function HairCheck({
 
   useEffect(() => {
     setUsername(user?.user_metadata?.name);
-    callObject?.setUserData({ avatar_url: user?.user_metadata?.avatar_url || '' });
+    callObject?.setUserName(user?.user_metadata?.name);
+    callObject?.setUserData({
+      avatar_url: user?.user_metadata?.avatar_url || '',
+    });
   }, [user, callObject]);
 
   useDailyEvent(
