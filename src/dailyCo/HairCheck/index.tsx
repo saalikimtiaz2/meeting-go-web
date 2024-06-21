@@ -255,16 +255,19 @@ export default function HairCheck({
               <div className="absolute bottom-2 left-1/2 p-3 gap-x-2 -translate-x-1/2 bg-black/30 backdrop-blur-md flex items-center justify-center rounded-full">
                 <TileButton
                   onClick={toggleCamera}
+                  text={cameraOn ? 'Turn on Camera' : 'Turn off Camera'}
                   icon={cameraOn ? <CiVideoOn /> : <CiVideoOff />}
                   iconClassName=" border-white text-black dark:text-white  hover:bg-blue-700/90 hover:text-white hover:border-blue-500"
                 />
                 <TileButton
                   onClick={toggleMic}
+                  text={micOn ? 'Unmute' : 'Mute'}
                   icon={micOn ? <CiMicrophoneOn /> : <CiMicrophoneOff />}
                   iconClassName=" border-white text-black dark:text-white  hover:bg-blue-700/90 hover:text-white hover:border-blue-500"
                 />
                 <TileButton
                   onClick={toggleSettingDrawer}
+                  text="Settings"
                   icon={<CiSettings />}
                   iconClassName=" border-white text-black dark:text-white  hover:bg-blue-700/90 hover:text-white hover:border-blue-500"
                 />
