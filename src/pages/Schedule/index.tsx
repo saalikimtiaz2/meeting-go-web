@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-autofocus */
+import { MeetingButton } from 'components/Buttons';
 import HistoryCard from 'components/Cards/HistoryCard';
 import MeetingCard from 'components/Cards/MeetingCard';
 import DashboardLayout from 'components/DashboardLayout';
@@ -15,6 +16,7 @@ import { CiCalendar, CiVideoOn } from 'react-icons/ci';
 import { IoAddOutline } from 'react-icons/io5';
 import { SlScreenDesktop } from 'react-icons/sl';
 import { TailSpin } from 'react-loader-spinner';
+import { useNavigate } from 'react-router-dom';
 
 type meetingCardProps = {
   title: string;
@@ -99,7 +101,8 @@ const history: historyCardProps[] = [
 ];
 
 const Schedule: FC = () => {
-  // const { user } = useAuth();
+  const navigate = useNavigate();
+
   const { loading, scheduleMeeting } = useScheduleMeeting();
 
   const [showClearHistoryDialog, setShowClearHistoryDialog] = useState<boolean>(false);
@@ -110,9 +113,17 @@ const Schedule: FC = () => {
 
   const [showCreateRoomDialog, setShowCreateRoomDialog] = useState<boolean>(false);
   const [roomName, setRoomName] = useState<string>('');
+  const [description, setDescription] = useState('');
   const [dateTime, setDateTime] = useState('');
   const [duration, setDuration] = useState(15);
   const [invitedUsers, setInvitedUsers] = useState<string[]>([]);
+
+  const [showJoinMeetingModal, setShowJoinMeetingModal] = useState<boolean>(false);
+  const [meetingLink, setMeetingLink] = useState<string>('');
+
+  const toggleJoinMeetingModal = () => {
+    setShowJoinMeetingModal((prevState) => !prevState);
+  };
 
   const toggleCreateRoomDialog = () => {
     setShowCreateRoomDialog((prevState) => !prevState);
@@ -145,7 +156,7 @@ const Schedule: FC = () => {
         isOpen={showCreateRoomDialog}
         closeDialog={toggleCreateRoomDialog}
         title="Scedule New Meeting"
-        discription="Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, reprehenderit?"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, reprehenderit?"
       >
         <form className="mt-6">
           <label htmlFor="name" className="text-lg font-Oswald text-gray-500">
@@ -161,10 +172,10 @@ const Schedule: FC = () => {
             Dscription
             <textarea
               placeholder="Sprint Planning, Daily Meeting, etc."
-              value={roomName}
+              value={description}
               name="Enter your description here..."
               rows={2}
-              onChange={(e) => setRoomName(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </label>
           <label
@@ -180,13 +191,6 @@ const Schedule: FC = () => {
               onChange={(e) => setDateTime(e.target.value)}
               required
             />
-            {/* <Calendar
-              id="dateTime"
-              onChange={setDateTime}
-              value={dateTime}
-              minDate={new Date()}
-              className="border-2 bg-black/5 dark:bg-white/20 border-gray-200 dark:border-gray-700 w-full py-2.5 font-Montserrat text-black dark:text-gray-200 outline-none text-base rounded-xl px-4 mb-2 focus:border-primary dark:focus:border-primary transition-all ease-in-out duration-300"
-            /> */}
           </label>
           <label
             htmlFor="invitedUsers"
@@ -253,47 +257,71 @@ const Schedule: FC = () => {
         </div>
       </DialogBox>
 
+      {/* -------------------------------------Join Meeting DIalog---------------------------------------------- */}
+      <DialogBox
+        isOpen={showJoinMeetingModal}
+        closeDialog={toggleJoinMeetingModal}
+        title="Join Meeting"
+        description="Please paste the invitation link below to join the meeeting."
+      >
+        <label htmlFor="meeting-link" className="text-lg font-Oswald text-gray-500">
+          Meeting Link
+          <input
+            name="meeting-link"
+            className="font-Montserrat"
+            placeholder="example"
+            value={meetingLink}
+            onChange={(e) => setMeetingLink(e.target.value)}
+          />
+        </label>
+
+        <div className="flex items-center justify-end gap-x-6">
+          <button
+            onClick={toggleJoinMeetingModal}
+            className="w-32 py-2 rounded-md hover:bg-opacity-100 bg-opacity-70 bg-gray-500 text-white"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => {
+              navigate(`/meeting?${meetingLink}}`);
+            }}
+            className="w-32 py-2 rounded-md hover:bg-opacity-100 bg-opacity-70 bg-green-500 text-white"
+          >
+            Join
+          </button>
+        </div>
+      </DialogBox>
+
       <Heading2 className="mb-4">Meetings</Heading2>
       <div className="grid grid-cols-12 gap-4">
-        <button className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-orange-500 text-white text-left text-xl">
-          <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
-            <CiVideoOn size={32} />
-          </div>
-          <div className="absolute bottom-6 right-6 opacity-10 -rotate-45 scale-[4]">
-            <CiVideoOn size={32} />
-          </div>
-          New Meeting
-        </button>
-        <button className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-blue-500 text-white text-left text-xl">
-          <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
-            <IoAddOutline size={32} />
-          </div>
-          <div className="absolute bottom-6 right-6 opacity-10   scale-[4]">
-            <IoAddOutline size={32} />
-          </div>
-          Join Meeitng
-        </button>
-        <button
+        <MeetingButton
+          className="bg-orange-500 text-white"
+          icon={<CiVideoOn size={32} />}
+          text="New Meeting"
+          onClick={() => {
+            console.log('new meeting clicked!');
+          }}
+        />
+        <MeetingButton
+          className="bg-blue-500 text-white"
+          icon={<IoAddOutline size={32} />}
+          text="Join Meeting"
+          onClick={toggleJoinMeetingModal}
+        />
+
+        <MeetingButton
+          className="bg-red-500 text-white"
+          icon={<CiCalendar size={32} />}
+          text="Schedule"
           onClick={toggleCreateRoomDialog}
-          className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-red-500 text-white text-left text-xl"
-        >
-          <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
-            <CiCalendar size={32} />
-          </div>
-          <div className="absolute bottom-6 right-6 opacity-10 rotate-45 scale-[4]">
-            <CiCalendar size={32} />
-          </div>
-          Schedule
-        </button>
-        <button className="relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 bg-green-500 text-white text-left text-xl">
-          <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
-            <SlScreenDesktop size={32} />
-          </div>
-          <div className="absolute bottom-6 right-6 opacity-10 rotate-45 scale-[4]">
-            <SlScreenDesktop size={32} />
-          </div>
-          Share Screen
-        </button>
+        />
+        <MeetingButton
+          className="bg-green-500 text-white"
+          icon={<SlScreenDesktop size={32} />}
+          text="Share Screen"
+          onClick={() => {}}
+        />
       </div>
 
       <Heading2 className="my-8">Upcoming Meetings</Heading2>

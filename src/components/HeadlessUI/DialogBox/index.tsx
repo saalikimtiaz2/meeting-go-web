@@ -13,7 +13,7 @@ type DialogProps = {
   isOpen: boolean;
   closeDialog: () => void;
   title?: string;
-  discription?: string;
+  description?: string;
   children?: React.ReactNode;
 };
 
@@ -21,7 +21,7 @@ const DialogBox: FC<DialogProps> = ({
   isOpen,
   closeDialog,
   title,
-  discription,
+  description,
   children,
 }) => {
   return (
@@ -45,7 +45,9 @@ const DialogBox: FC<DialogProps> = ({
                   <MdClose size={30} />
                 </button>
                 {title && <Heading2 className="mb-4">{title}</Heading2>}
-                {discription && <Description>{discription}</Description>}
+                {description && (
+                  <Description className="text-gray-500">{description}</Description>
+                )}
                 {children}
               </DialogPanel>
             </TransitionChild>

@@ -34,3 +34,30 @@ export const TileButton = ({
     </>
   );
 };
+
+export const MeetingButton = ({
+  className,
+  onClick,
+  icon,
+  text,
+}: {
+  className?: string;
+  text?: string;
+  icon?: React.ReactNode;
+  onClick: () => void;
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`relative overflow-hidden xs:col-span-6 md:col-span-3 rounded-lg p-6 text-left text-xl ${className}`}
+    >
+      <div className="h-12 w-12 rounded-xl bg-black/20 backdrop-blur-sm flex items-center justify-center mb-4">
+        {icon}
+      </div>
+      <div className="absolute bottom-6 right-6 opacity-10 -rotate-45 scale-[4]">
+        {icon}
+      </div>
+      {text}
+    </button>
+  );
+};

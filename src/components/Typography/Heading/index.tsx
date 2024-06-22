@@ -29,7 +29,7 @@ export const Heading2 = ({
 }) => {
   return (
     <h2
-      className={`text-gray-400 dark:text-gray-500 text-${size} font-Oswald ${className}`}
+      className={`text-gray-600 dark:text-gray-400 text-${size} font-Oswald ${className}`}
     >
       {children}
     </h2>
