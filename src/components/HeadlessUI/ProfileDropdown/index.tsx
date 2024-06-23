@@ -14,8 +14,8 @@ import { Link } from 'react-router-dom';
 const menuItems = [
   {
     icon: <PiUserLight size={24} className="fill-gray-600 dark:fill-white/50" />,
-    title: 'Profile',
-    link: '/profile',
+    title: 'Account',
+    link: '/account',
     shortcut: '⌘U',
   },
   {

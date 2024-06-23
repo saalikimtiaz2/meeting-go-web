@@ -293,88 +293,106 @@ const Schedule: FC = () => {
         </div>
       </DialogBox>
 
-      <Heading2 className="mb-4">Meetings</Heading2>
-      <div className="grid grid-cols-12 gap-4">
-        <MeetingButton
-          className="bg-orange-500 text-white"
-          icon={<CiVideoOn size={32} />}
-          text="New Meeting"
-          onClick={() => {
-            console.log('new meeting clicked!');
-          }}
-        />
-        <MeetingButton
-          className="bg-blue-500 text-white"
-          icon={<IoAddOutline size={32} />}
-          text="Join Meeting"
-          onClick={toggleJoinMeetingModal}
-        />
+      <div className="pb-20">
+        <Heading2 className="mb-4">Meetings</Heading2>
 
-        <MeetingButton
-          className="bg-red-500 text-white"
-          icon={<CiCalendar size={32} />}
-          text="Schedule"
-          onClick={toggleCreateRoomDialog}
-        />
-        <MeetingButton
-          className="bg-green-500 text-white"
-          icon={<SlScreenDesktop size={32} />}
-          text="Share Screen"
-          onClick={() => {}}
-        />
-      </div>
+        <div className="grid grid-cols-12 gap-4">
+          <MeetingButton
+            className="bg-orange-500 text-white"
+            icon={<CiVideoOn size={32} />}
+            text="New Meeting"
+            onClick={() => {
+              console.log('new meeting clicked!');
+            }}
+          />
+          <MeetingButton
+            className="bg-blue-500 text-white"
+            icon={<IoAddOutline size={32} />}
+            text="Join Meeting"
+            onClick={toggleJoinMeetingModal}
+          />
 
-      <Heading2 className="my-8">Upcoming Meetings</Heading2>
-      <div className="grid grid-cols-12 gap-4">
-        {upcomingMeetings.map((meeting, idx) => (
-          <div
-            key={meeting.title + idx}
-            className="xs:col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-3"
-          >
-            <MeetingCard title={meeting.title} time={meeting.time} tags={meeting.tags} />
+          <MeetingButton
+            className="bg-red-500 text-white"
+            icon={<CiCalendar size={32} />}
+            text="Schedule"
+            onClick={toggleCreateRoomDialog}
+          />
+          <MeetingButton
+            className="bg-green-500 text-white"
+            icon={<SlScreenDesktop size={32} />}
+            text="Share Screen"
+            onClick={() => {}}
+          />
+        </div>
+
+        <Heading2 className="my-8">Upcoming Meetings</Heading2>
+        {upcomingMeetings.length > 0 ? (
+          <div className="grid grid-cols-12 gap-4">
+            {upcomingMeetings.map((meeting, idx) => (
+              <div
+                key={meeting.title + idx}
+                className="xs:col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-3"
+              >
+                <MeetingCard
+                  title={meeting.title}
+                  time={meeting.time}
+                  tags={meeting.tags}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        ) : (
+          <div className="border border-gray-300 dark:border-gray-700 rounded-xl pb-10">
+            <img
+              src="infographics/no-meeting.svg"
+              className="xs:h-[250px] lg:h-[350px] mx-auto opacity-50"
+              alt=""
+            />
+            <p className="text-xl text-center text-gray-500">No scheduled meeting!</p>
+          </div>
+        )}
 
-      <div className="flex items-center justify-between my-8">
-        <Heading2>History</Heading2>
-        {meetingsHistory.length > 0 && (
-          <button
-            onClick={toggleClearHistoryModal}
-            className="text-primary hover:text-accent text-sm"
-          >
-            Clear History
-          </button>
+        <div className="flex items-center justify-between my-8">
+          <Heading2>History</Heading2>
+          {meetingsHistory.length > 0 && (
+            <button
+              onClick={toggleClearHistoryModal}
+              className="text-primary hover:text-accent text-sm"
+            >
+              Clear History
+            </button>
+          )}
+        </div>
+
+        {meetingsHistory.length > 0 ? (
+          <div className="grid grid-cols-12 gap-4">
+            {meetingsHistory.reverse().map((meeting, idx) => (
+              <div
+                key={meeting.title + idx}
+                className="xs:col-span-12 md:col-span-6 xl:col-span-4"
+              >
+                <HistoryCard
+                  title={meeting.title}
+                  time={meeting.time}
+                  tags={meeting.tags}
+                  day={meeting.day}
+                  month={meeting.month}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="border border-gray-300 dark:border-gray-700 rounded-xl py-10 text-gray-500 mb-10">
+            <img
+              src="/infographics/no-data.svg"
+              className="h-32 mb-2 opacity-50 mx-auto"
+              alt="no data"
+            />
+            <p className="text-xl text-center">No history!</p>
+          </div>
         )}
       </div>
-
-      {meetingsHistory.length > 0 ? (
-        <div className="grid grid-cols-12 gap-4">
-          {meetingsHistory.reverse().map((meeting, idx) => (
-            <div
-              key={meeting.title + idx}
-              className="xs:col-span-12 md:col-span-6 xl:col-span-4"
-            >
-              <HistoryCard
-                title={meeting.title}
-                time={meeting.time}
-                tags={meeting.tags}
-                day={meeting.day}
-                month={meeting.month}
-              />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="flex items-center justify-center flex-col text-gray-500">
-          <img
-            src="/infographics/no-data.svg"
-            className="h-32 mb-2 opacity-50"
-            alt="no data"
-          />
-          <p className="text-xl">No history!</p>
-        </div>
-      )}
     </DashboardLayout>
   );
 };

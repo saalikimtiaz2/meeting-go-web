@@ -122,7 +122,13 @@ export default function Chat({
         title="Add People"
         description="Share the link below with others you want in the meeting."
       >
-        <div className="bg-gray-100 border border-gray-200 dark:bg-gray-500 dark:border-gray-600 p-4 rounded-xl flex items-start gap-x-6">
+        <div
+          className={`border-2 ${
+            copyStatus
+              ? 'border-green-500 shadow-2xl'
+              : ' border-gray-200  dark:border-gray-600'
+          } bg-gray-100 dark:bg-gray-500 p-4 rounded-xl flex items-start gap-x-6`}
+        >
           <p className="grow">{copyStatus ? 'Copied!' : meetingURL}</p>
           <CopyToClipboard text={meetingURL || ''} onCopy={onCopyText}>
             <button
