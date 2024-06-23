@@ -346,7 +346,7 @@ const Schedule: FC = () => {
           <div className="border border-gray-300 dark:border-gray-700 rounded-xl pb-10">
             <img
               src="infographics/no-meeting.svg"
-              className="xs:h-[250px] lg:h-[350px] mx-auto opacity-50"
+              className="xs:h-[250px] lg:h-[250px] mx-auto dark:opacity-50"
               alt=""
             />
             <p className="text-xl text-center text-gray-500">No scheduled meeting!</p>
