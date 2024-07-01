@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -264,7 +265,10 @@ const Schedule: FC = () => {
         title="Join Meeting"
         description="Please paste the invitation link below to join the meeeting."
       >
-        <label htmlFor="meeting-link" className="text-lg font-Oswald text-gray-500">
+        <label
+          htmlFor="meeting-link"
+          className="text-lg font-Oswald text-gray-500  relative"
+        >
           Meeting Link
           <input
             name="meeting-link"
@@ -273,6 +277,9 @@ const Schedule: FC = () => {
             value={meetingLink}
             onChange={(e) => setMeetingLink(e.target.value)}
           />
+          <button className="absolute top-8 right-4" type="button" onClick={() => {}}>
+            paste
+          </button>
         </label>
 
         <div className="flex items-center justify-end gap-x-6">
@@ -284,7 +291,8 @@ const Schedule: FC = () => {
           </button>
           <button
             onClick={() => {
-              navigate(`/meeting?${meetingLink}}`);
+              console.log(`/meeting?roomUrl=${meetingLink}`);
+              navigate(`/meeting?roomUrl=${meetingLink}`);
             }}
             className="w-32 py-2 rounded-md hover:bg-opacity-100 bg-opacity-70 bg-green-500 text-white"
           >

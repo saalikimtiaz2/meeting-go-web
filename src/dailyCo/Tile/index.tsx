@@ -86,7 +86,7 @@ const Tile: FC<TileProps> = ({
   return (
     <div
       className={`${containerCssClasses} bg-gray-500 flex items-end justify-center  ${
-        isSpotlightTile ? ' spotlight-tile' : ' small-tile mb-4 shadow-2xl'
+        isSpotlightTile ? ' spotlight-tile' : ' small-tile'
       } 
         ${!videoTrack && !isScreenShare && 'full-width-video'}
         ${!videoTrack && !isScreenShare && !isSpotlightTile && 'no-full-width-video'}

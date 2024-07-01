@@ -141,25 +141,27 @@ const Call: React.FC<CallProps> = ({ callObject, startLeavingCall }) => {
               );
             }
           })}
-          <div className="absolute top-1 right-1 bottom-1 flex xs:w-[130px] md:w-[240px] flex-col items-end">
-            {Object.entries(participants).map(([id, participant]) => {
-              if (id !== spotlightUser) {
-                return (
-                  <Tile
-                    key={id}
-                    videoTrack={participant.videoTrack}
-                    audioTrack={participant.audioTrack}
-                    id={id}
-                    isLocal={participant.isLocal}
-                    isAlone={Object.entries(participants).length === 1}
-                    isSpotlightTile={spotlightUser === id}
-                    setSpotlightTile={changeSpotlightUser}
-                    username={participant.username}
-                  />
-                );
-              }
-            })}
-          </div>
+          {Object.entries(participants).length > 1 && (
+            <div className="absolute top-1 right-1 h-max flex xs:w-[130px] md:w-[240px] flex-col gap-y-4 items-end bg-black/50 p-1 rounded-xl backdrop-blur-sm">
+              {Object.entries(participants).map(([id, participant]) => {
+                if (id !== spotlightUser) {
+                  return (
+                    <Tile
+                      key={id}
+                      videoTrack={participant.videoTrack}
+                      audioTrack={participant.audioTrack}
+                      id={id}
+                      isLocal={participant.isLocal}
+                      isAlone={Object.entries(participants).length === 1}
+                      isSpotlightTile={spotlightUser === id}
+                      setSpotlightTile={changeSpotlightUser}
+                      username={participant.username}
+                    />
+                  );
+                }
+              })}
+            </div>
+          )}
           <Tray
             leaveCall={startLeavingCall}
             toggleChat={toggleChat}
