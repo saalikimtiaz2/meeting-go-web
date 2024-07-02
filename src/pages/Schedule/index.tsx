@@ -15,6 +15,7 @@ import useScheduleMeeting from 'hooks/Meeting/useScheduleMeeing';
 import React, { FC, useState } from 'react';
 import { CiCalendar, CiVideoOn } from 'react-icons/ci';
 import { IoAddOutline } from 'react-icons/io5';
+import { LiaPasteSolid } from 'react-icons/lia';
 import { SlScreenDesktop } from 'react-icons/sl';
 import { TailSpin } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
@@ -149,6 +150,16 @@ const Schedule: FC = () => {
     });
   };
 
+  // ---------------on paste handler---------------------------------------
+  const handlePasteClick = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      setMeetingLink(text);
+    } catch (err) {
+      console.error('Failed to read clipboard contents: ', err);
+    }
+  };
+
   return (
     <DashboardLayout>
       {/* -------------------------------------Clear History DIalog---------------------------------------------- */}
@@ -273,12 +284,16 @@ const Schedule: FC = () => {
           <input
             name="meeting-link"
             className="font-Montserrat"
-            placeholder="example"
+            placeholder="/meeting-link"
             value={meetingLink}
             onChange={(e) => setMeetingLink(e.target.value)}
           />
-          <button className="absolute top-8 right-4" type="button" onClick={() => {}}>
-            paste
+          <button
+            className="absolute top-8 right-1 px-4 py-1 bg-[#F2F2F2] dark:bg-[#5F6774]  text-gray-400 dark:text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+            type="button"
+            onClick={handlePasteClick}
+          >
+            <LiaPasteSolid size={24} />
           </button>
         </label>
 

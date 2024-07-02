@@ -63,7 +63,7 @@ const SignUp = () => {
                   alt=" "
                   className="h-8 w-8"
                 />
-                Sign with Google
+                Sign up with Google
               </button>
 
               <div className="relative mb-10 mt-10">
