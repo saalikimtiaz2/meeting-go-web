@@ -289,7 +289,7 @@ const Schedule: FC = () => {
             onChange={(e) => setMeetingLink(e.target.value)}
           />
           <button
-            className="absolute top-8 right-1 px-4 py-1 bg-[#F2F2F2] dark:bg-[#5F6774]  text-gray-400 dark:text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+            className="absolute top-8 right-1 px-4 pb-1 pt-1.5 bg-[#F2F2F2] dark:bg-[#5F6774]  text-gray-400 dark:text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
             type="button"
             onClick={handlePasteClick}
           >
@@ -310,6 +310,7 @@ const Schedule: FC = () => {
               navigate(`/meeting?roomUrl=${meetingLink}`);
             }}
             className="w-32 py-2 rounded-md hover:bg-opacity-100 bg-opacity-70 bg-green-500 text-white"
+            disabled={meetingLink.length === 0}
           >
             Join
           </button>

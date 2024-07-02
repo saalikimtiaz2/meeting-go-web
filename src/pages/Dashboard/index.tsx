@@ -1,5 +1,6 @@
 import Calender from 'components/Calender';
 import DashboardLayout from 'components/DashboardLayout';
+import LiveClock from 'components/LiveClock';
 import Loader from 'components/Loader';
 import GradualSpacing from 'components/MagicUI/GradualSpacing';
 import NumberTicker from 'components/MagicUI/NumberTicker';
@@ -74,10 +75,7 @@ function Dashboard() {
         />
         <div className="cover  rounded-xl text-white  h-[250px] relative overflow-hidden drop-shadow-xl mt-4">
           <div className="absolute px-8 top-0 right-0 bottom-0 left-0 bg-gradient-to-r from-black to-transparent flex flex-col justify-center">
-            <p className="text-white text-[94px] leading-none font-Oswald">
-              7:19 <span className="inline-block text-xl">PM</span>
-            </p>
-            <p className="">Satureday 10 May, 2024</p>
+            <LiveClock />
           </div>
         </div>
         <div className="grid grid-cols-12 mt-10 gap-6">
